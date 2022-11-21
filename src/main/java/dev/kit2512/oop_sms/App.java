@@ -9,7 +9,7 @@ package dev.kit2512.oop_sms;
  *
  * @author macpro13
  */
-public class Oop_sms {
+public class App {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
