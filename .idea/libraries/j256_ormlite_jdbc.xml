@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="j256.ormlite.jdbc" type="repository">
+    <properties maven-id="com.j256.ormlite:ormlite-jdbc:4.46" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/j256/ormlite/ormlite-jdbc/4.46/ormlite-jdbc-4.46.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/j256/ormlite/ormlite-core/4.46/ormlite-core-4.46.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/j256/ormlite/ormlite-jdbc/4.46/ormlite-jdbc-4.46-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/j256/ormlite/ormlite-core/4.46/ormlite-core-4.46-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/j256/ormlite/ormlite-jdbc/4.46/ormlite-jdbc-4.46-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/j256/ormlite/ormlite-core/4.46/ormlite-core-4.46-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
