@@ -5,10 +5,7 @@
 package dev.kit2512.oop_sms.config.injectors;
 
 import dagger.Component;
-import dagger.Provides;
-import dagger.Subcomponent;
 import dev.kit2512.oop_sms.data.repositories.AuthenticationRepositoryImpl;
-import dev.kit2512.oop_sms.domain.repositories.AuthenticationRepository;
 import dev.kit2512.oop_sms.domain.usecases.LoginUseCase;
 import dev.kit2512.oop_sms.presentation.controllers.LoginController;
 import dev.kit2512.oop_sms.presentation.models.LoginModel;

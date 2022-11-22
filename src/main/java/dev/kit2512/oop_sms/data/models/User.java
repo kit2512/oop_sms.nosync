@@ -18,7 +18,7 @@ import java.util.Date;
  */
 
 @DatabaseTable(tableName = User.TABLE_NAME)
-public class User implements UserEntity {
+public class User extends UserEntity {
     public static final String TABLE_NAME = "users";
 
     @DatabaseField(columnName = "id", generatedId = true)
@@ -74,6 +74,7 @@ public class User implements UserEntity {
 
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
@@ -82,15 +83,17 @@ public class User implements UserEntity {
         return username;
     }
 
+    @Override
     public void setUsername(String username) {
         this.username = username;
     }
 
+    @Override
     public Date getDateCreated() {
         return dateCreated;
     }
 
-
+    @Override
     public Date getDateUpdated() {
         return dateUpdated;
     }
@@ -146,4 +149,6 @@ public class User implements UserEntity {
     public void setGender(boolean gender) {
         this.gender = gender;
     }
+
+
 }

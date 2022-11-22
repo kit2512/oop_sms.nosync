@@ -7,7 +7,7 @@ import dagger.Module;
 import dagger.Provides;
 import dev.kit2512.oop_sms.data.database.UserDao;
 import dev.kit2512.oop_sms.data.repositories.AuthenticationRepositoryImpl;
-import dev.kit2512.oop_sms.domain.repositories.AuthenticationRepository;
+import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 
 import javax.inject.Singleton;
 

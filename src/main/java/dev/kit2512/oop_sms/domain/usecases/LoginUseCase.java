@@ -4,10 +4,10 @@
  */
 package dev.kit2512.oop_sms.domain.usecases;
 
-import dev.kit2512.oop_sms.config.exceptions.AuthenticationException;
+import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationException;
 import dev.kit2512.oop_sms.config.exceptions.LoginException;
 import dev.kit2512.oop_sms.data.models.User;
-import dev.kit2512.oop_sms.domain.repositories.AuthenticationRepository;
+import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 import javax.inject.Inject;
 
 /**

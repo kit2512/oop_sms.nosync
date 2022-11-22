@@ -2,41 +2,51 @@ package dev.kit2512.oop_sms.domain.entities;
 
 import java.util.Date;
 
-public interface UserEntity {
-    Integer getId();
+public abstract class UserEntity {
+    public static  final String ID_PROPERTY = "id";
+    public static  final String USERNAME_PROPERTY = "username";
+    public static  final String PASSWORD_PROPERTY = "password";
+    public static  final String DATE_CREATED_PROPERTY = "dateCreated";
+    public static  final String DATE_UPDATED_PROPERTY = "dateUpdated";
+    public static  final String FULL_NAME_PROPERTY = "fullName";
+    public static  final String EMAIL_PROPERTY = "email";
+    public static  final String PHONE_PROPERTY = "phone";
+    public static  final String ADDRESS_PROPERTY = "address";
+    public static  final String ROLE_PROPERTY = "role";
 
-    String getUsername();
+    abstract public Integer getId();
 
-    void setUsername(String username);
+    abstract public String getUsername();
 
-    Date getDateCreated();
+    abstract public void setUsername(String username);
 
+    abstract public Date getDateCreated();
 
-    Date getDateUpdated();
+    abstract public Date getDateUpdated();
 
-    void setDateUpdated(Date dateUpdated);
+    abstract public void setDateUpdated(Date dateUpdated);
 
-    String getFullName();
+    abstract public String getFullName();
 
-    void setFullName(String fullName);
+    abstract public void setFullName(String fullName);
 
-    String getEmail();
+    abstract public String getEmail();
 
-    void setEmail(String email);
+    abstract public void setEmail(String email);
 
-    String getPhone();
+    abstract public String getPhone();
 
-    void setPhone(String phone);
+    abstract public void setPhone(String phone);
 
-    String getAddress();
+    abstract public String getAddress();
 
-    void setAddress(String address);
+    abstract public void setAddress(String address);
 
-    String getRole();
+    abstract public String getRole();
 
-    void setRole(String role);
+    abstract public void setRole(String role);
 
-    boolean getGender();
+    abstract public boolean getGender();
 
-    void setGender(boolean gender);
+    abstract public void setGender(boolean gender);
 }

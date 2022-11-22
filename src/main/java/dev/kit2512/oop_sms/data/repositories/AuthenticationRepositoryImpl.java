@@ -4,11 +4,11 @@
  */
 package dev.kit2512.oop_sms.data.repositories;
 
-import dev.kit2512.oop_sms.config.exceptions.AuthenticationException;
+import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationException;
 import dev.kit2512.oop_sms.data.database.UserDao;
 import dev.kit2512.oop_sms.data.database.UserDaoImpl;
 import dev.kit2512.oop_sms.data.models.User;
-import dev.kit2512.oop_sms.domain.repositories.AuthenticationRepository;
+import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +20,7 @@ import javax.inject.Inject;
  */
 
 public class AuthenticationRepositoryImpl implements AuthenticationRepository {
-    @Inject
-    public UserDao userDao;
+    private UserDao userDao;
 
     @Inject
     public AuthenticationRepositoryImpl(UserDao userDao) {

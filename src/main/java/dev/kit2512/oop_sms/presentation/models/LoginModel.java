@@ -1,7 +1,7 @@
 package dev.kit2512.oop_sms.presentation.models;
 
+import dev.kit2512.oop_sms.config.AppConstants;
 import dev.kit2512.oop_sms.config.exceptions.LoginException;
-import dev.kit2512.oop_sms.domain.repositories.AuthenticationRepository;
 import dev.kit2512.oop_sms.domain.usecases.LoginUseCase;
 
 import javax.inject.Inject;
@@ -62,15 +62,27 @@ public class LoginModel extends AbstractModel {
         try {
             if (username.isEmpty()) {
                 throw new LoginException("Username must not be empty");
-            } else {
-                if (password.isEmpty()) {
-                    throw new LoginException("Password must not be empty");
-                } else {
-                    loginUseCase.excecute(this.username, this.password);
-                    setErrorMessage(null);
-                    setSuccess(true);
-                }
             }
+
+            if (!username.matches(AppConstants.StringPattern.usernamePattern)) {
+                throw new LoginException("Username is not valid");
+            }
+
+            if (username.length() <= 8 || username.length() >= 16) {
+                throw new LoginException("Username must be between 8 and 16 characters");
+            }
+
+            if (password.isEmpty()) {
+                throw new LoginException("Password must not be empty");
+            }
+
+            if (password.length() <= 8 ) {
+                throw new LoginException("Password must be at least 8 characters");
+            }
+
+            loginUseCase.excecute(this.username, this.password);
+            setErrorMessage(null);
+            setSuccess(true);
 
         } catch (LoginException ex) {
             setSuccess(false);
