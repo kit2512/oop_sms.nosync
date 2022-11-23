@@ -27,9 +27,6 @@ import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentReposit
 import dev.kit2512.oop_sms.domain.repositories.SubjectRepository.SubjectRepository;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserRepository;
 import dev.kit2512.oop_sms.presentation.controllers.LoginController;
-import dev.kit2512.oop_sms.presentation.models.AbstractModel;
-import dev.kit2512.oop_sms.presentation.models.LoginModel;
-import dev.kit2512.oop_sms.presentation.views.AbstractView;
 import dev.kit2512.oop_sms.presentation.views.LoginView;
 
 
