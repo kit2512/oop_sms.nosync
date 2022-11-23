@@ -5,6 +5,8 @@ import dev.kit2512.oop_sms.config.exceptions.LoginException;
 import dev.kit2512.oop_sms.domain.usecases.LoginUseCase;
 
 import javax.inject.Inject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -64,9 +66,9 @@ public class LoginModel extends AbstractModel {
                 throw new LoginException("Username must not be empty");
             }
 
-            if (!username.matches(AppConstants.StringPattern.usernamePattern)) {
-                throw new LoginException("Username is not valid");
-            }
+//            if (!username.matches(AppConstants.StringPattern.usernamePattern)) {
+//                throw new LoginException("Username is not valid");
+//            }
 
             if (username.length() <= 8 || username.length() >= 16) {
                 throw new LoginException("Username must be between 8 and 16 characters");

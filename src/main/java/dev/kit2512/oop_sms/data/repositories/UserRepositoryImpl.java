@@ -1,19 +1,16 @@
 package dev.kit2512.oop_sms.data.repositories;
 
-import dev.kit2512.oop_sms.config.UserFilterEnum;
-import dev.kit2512.oop_sms.data.database.UserDao;
-import dev.kit2512.oop_sms.data.models.User;
+import dev.kit2512.oop_sms.data.daos.UserDao.UserDao;
+import dev.kit2512.oop_sms.domain.models.UserModel;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserException;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserRepository;
 
 import javax.inject.Inject;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository {
-    private final UserDao userDao;
+    private UserDao userDao;
 
     @Inject
     public UserRepositoryImpl(UserDao userDao) {
@@ -21,45 +18,27 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> getUsers() throws UserException {
-        try {
-            return userDao.queryForAll();
-        } catch (SQLException e) {
-            throw new UserException("Error getting users");
-        }
+    public List<UserModel> getUsers() throws UserException {
+        return null;
     }
 
     @Override
-    public List<User> getUsers(HashMap<String, Object> filter) throws  UserException{
-        try {
-            return userDao.queryForFieldValues(filter);
-        } catch (SQLException e) {
-            throw new UserException("Error getting users");
-        }
+    public List<UserModel> getUsers(HashMap<String, Object> filter) throws UserException {
+        return null;
     }
 
     @Override
-    public User removeUser(User user) throws UserException{
-        try {
-            userDao.delete(user);
-            return user;
-        } catch (SQLException e) {
-            throw new UserException("Unable to delete user." + e.getMessage());
-        }
+    public UserModel removeUser(UserModel userEntity) throws UserException {
+        return null;
     }
 
     @Override
-    public User addUser(User user) throws UserException{
-        try {
-            userDao.create(user);
-        } catch (SQLException e) {
-            throw new UserException("Unable to add user." + e.getMessage());
-        }
-        return user;
+    public UserModel addUser(UserModel userEntity) throws UserException {
+        return null;
     }
 
     @Override
-    public User updateUser(User oldUser, User newUser) {
-        return newUser;
+    public UserModel updateUser(UserModel oldUserModel, UserModel newUserModel) throws UserException {
+        return null;
     }
 }

@@ -4,20 +4,21 @@
  */
 package dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository;
 
-import dev.kit2512.oop_sms.data.models.User;
+
+import dev.kit2512.oop_sms.domain.models.UserModel;
 
 /**
  *
  * @author macpro13
  */
 public interface AuthenticationRepository {
-    User getCurrentUser();
-    
-    User logIn(String username, String password) throws AuthenticationException;
-    
+    UserModel getCurrentUser() throws AuthenticationException;
+
+    UserModel logIn(String username, String password) throws AuthenticationException;
+
     void logOut();
     
     boolean isLoggedIn();
     
-    void updatePassword(User user, String oldPassword, String newPassword);
+    void updatePassword(UserModel userEntity, String oldPassword, String newPassword) throws AuthenticationException;
 }

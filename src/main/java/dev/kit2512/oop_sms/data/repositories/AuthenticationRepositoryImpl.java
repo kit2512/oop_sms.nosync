@@ -4,12 +4,14 @@
  */
 package dev.kit2512.oop_sms.data.repositories;
 
+import dev.kit2512.oop_sms.domain.models.UserModel;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationException;
-import dev.kit2512.oop_sms.data.database.UserDao;
-import dev.kit2512.oop_sms.data.database.UserDaoImpl;
-import dev.kit2512.oop_sms.data.models.User;
+import dev.kit2512.oop_sms.data.daos.UserDao.UserDao;
+import dev.kit2512.oop_sms.data.daos.UserDao.UserDaoImpl;
+import dev.kit2512.oop_sms.data.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.inject.Inject;
@@ -22,6 +24,7 @@ import javax.inject.Inject;
 public class AuthenticationRepositoryImpl implements AuthenticationRepository {
     private UserDao userDao;
 
+
     @Inject
     public AuthenticationRepositoryImpl(UserDao userDao) {
         this.userDao = userDao;
@@ -31,31 +34,37 @@ public class AuthenticationRepositoryImpl implements AuthenticationRepository {
         this.userDao = userDao;
     }
 
-    private User currentUser;
+    private UserModel currentUser;
 
     @Override
-    public User getCurrentUser() {
+    public UserModel getCurrentUser() {
         return currentUser;
     }
     
-    private void setCurrentUser(User currentUser) {
+    private void setCurrentUser(UserModel currentUser) {
         this.currentUser = currentUser;
     }
 
     @Override
-    public User logIn(String username, String password) throws AuthenticationException {
+    public UserModel logIn(String username, String password) throws AuthenticationException {
         try {
             Map<String, Object> query = new HashMap<>();
-            query.put("username", username);
-            query.put("password", password);
+            query.put("user_username", username);
+            query.put("user_password", password);
 
-            final User user = userDao.queryForFieldValuesArgs(query).get(0);
-            return user;
+            final UserEntity userEntity = userDao.queryForFieldValuesArgs(query).get(0);
+
+            if (userEntity != null) {
+                setCurrentUser(userEntity.mapToModel());
+                return getCurrentUser();
+            } else {
+                throw new AuthenticationException("Invalid username or password");
+            }
+
         } catch (IndexOutOfBoundsException e) {
             throw new AuthenticationException("Username or password is incorrect");
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new AuthenticationException("Unknown error. Try again later");
+            throw new AuthenticationException(e.getMessage());
         }
     }
 
@@ -71,8 +80,17 @@ public class AuthenticationRepositoryImpl implements AuthenticationRepository {
     }
 
     @Override
-    public void updatePassword(User user, String oldPassword, String newPassword) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void updatePassword(UserModel userModel, String oldPassword, String newPassword) throws AuthenticationException{
+
+        final UserEntity userEntity = new UserEntity(userModel);
+        if (userEntity.getUserPassword().equals(oldPassword)) {
+            userEntity.setUserPassword(newPassword);
+            try {
+                userDao.update(userEntity);
+            } catch (SQLException e) {
+                throw new AuthenticationException("Unable to update password");
+            }
+        }
     }
     
 }

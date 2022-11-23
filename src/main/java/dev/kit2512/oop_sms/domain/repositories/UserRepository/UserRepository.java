@@ -4,9 +4,9 @@
  */
 package dev.kit2512.oop_sms.domain.repositories.UserRepository;
 
-import dev.kit2512.oop_sms.config.UserFilterEnum;
-import dev.kit2512.oop_sms.data.models.User;
-import java.util.ArrayList;
+
+import dev.kit2512.oop_sms.domain.models.UserModel;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,13 +15,13 @@ import java.util.List;
  * @author macpro13
  */
 public interface UserRepository {
-    List<User> getUsers() throws UserException;
+    List<UserModel> getUsers() throws UserException;
 
-    List<User> getUsers(HashMap<String, Object> filter) throws UserException;
+    List<UserModel> getUsers(HashMap<String, Object> filter) throws UserException;
 
-    User removeUser(User user) throws UserException;
+    UserModel removeUser(UserModel userEntity) throws UserException;
     
-    User addUser(User user) throws UserException;
+    UserModel addUser(UserModel userEntity) throws UserException;
     
-    User updateUser(User oldUser, User newUser) throws UserException;
+    UserModel updateUser(UserModel oldUserModel, UserModel newUserModel) throws UserException;
 }
