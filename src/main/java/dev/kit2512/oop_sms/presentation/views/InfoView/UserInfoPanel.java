@@ -2,19 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package dev.kit2512.oop_sms.presentation.views;
+package dev.kit2512.oop_sms.presentation.views.InfoView;
 
 /**
  *
  * @author h
  */
-public class UserInformationView extends javax.swing.JPanel {
+public class UserInfoPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form UserInformationView
      */
-    public UserInformationView() {
+    public UserInfoPanel() {
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -42,8 +43,8 @@ public class UserInformationView extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         roleLabel = new javax.swing.JLabel();
-        updateInfoButton = new javax.swing.JButton();
-        changePasswordBtn = new javax.swing.JButton();
+
+        setPreferredSize(new java.awt.Dimension(300, 182));
 
         jLabel1.setText("Username");
 
@@ -93,20 +94,6 @@ public class UserInformationView extends javax.swing.JPanel {
         roleLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         roleLabel.setText("Admin");
 
-        updateInfoButton.setText("Update information");
-        updateInfoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateInfoButtonActionPerformed(evt);
-            }
-        });
-
-        changePasswordBtn.setText("Change password");
-        changePasswordBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changePasswordBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,7 +111,7 @@ public class UserInformationView extends javax.swing.JPanel {
                         .addComponent(fullNameLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                         .addComponent(dateOfBirthLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -132,7 +119,7 @@ public class UserInformationView extends javax.swing.JPanel {
                         .addComponent(genderLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                         .addComponent(addressLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11)
@@ -140,16 +127,12 @@ public class UserInformationView extends javax.swing.JPanel {
                         .addComponent(emailLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                         .addComponent(phoneNumberLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
-                        .addComponent(roleLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(updateInfoButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(changePasswordBtn)))
+                        .addComponent(roleLabel)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -187,26 +170,13 @@ public class UserInformationView extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(roleLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateInfoButton)
-                    .addComponent(changePasswordBtn))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void updateInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateInfoButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateInfoButtonActionPerformed
-
-    private void changePasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_changePasswordBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressLabel;
-    private javax.swing.JButton changePasswordBtn;
     private javax.swing.JLabel dateOfBirthLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel fullNameLabel;
@@ -221,12 +191,11 @@ public class UserInformationView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel phoneNumberLabel;
     private javax.swing.JLabel roleLabel;
-    private javax.swing.JButton updateInfoButton;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 
     public static void main(String[] args) {
-        final UserInformationView view = new UserInformationView();
+        final UserInfoPanel view = new UserInfoPanel();
         view.setVisible(true);
     }
 }

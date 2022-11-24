@@ -119,7 +119,8 @@ public class App {
                 resultRepository,
                 subjectRepository,
                 studentRepository,
-                userRepository
+                userRepository,
+                majorRepository
         );
 
         appGraph = DaggerAppGraph.builder()
