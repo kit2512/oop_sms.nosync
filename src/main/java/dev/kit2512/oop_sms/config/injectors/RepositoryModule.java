@@ -23,14 +23,16 @@ public class RepositoryModule {
     private SubjectRepository subjectRepository;
     private StudentRepository studentRepository;
     private UserRepository userRepository;
+    private MajorRepository majorRepository;
 
 
-    public RepositoryModule(AuthenticationRepository authenticationRepository, ResultRepository resultRepository, SubjectRepository subjectRepository, StudentRepository studentRepository, UserRepository userRepository) {
+    public RepositoryModule(AuthenticationRepository authenticationRepository, ResultRepository resultRepository, SubjectRepository subjectRepository, StudentRepository studentRepository, UserRepository userRepository, MajorRepository majorRepository) {
         this.authenticationRepository = authenticationRepository;
         this.resultRepository = resultRepository;
         this.subjectRepository = subjectRepository;
         this.studentRepository = studentRepository;
         this.userRepository = userRepository;
+        this.majorRepository = majorRepository;
     }
 
     @Provides
@@ -61,5 +63,11 @@ public class RepositoryModule {
     @Singleton
     public UserRepository getUserRepository() {
         return userRepository;
+    }
+    
+    @Provides
+    @Singleton
+    public MajorRepository getMajorRepository() {
+        return majorRepository;
     }
 }
