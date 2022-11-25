@@ -5,7 +5,6 @@
 package dev.kit2512.oop_sms.presentation.controllers;
 
 import dev.kit2512.oop_sms.presentation.models.LoginModel;
-import dev.kit2512.oop_sms.presentation.views.LoginView;
 
 import javax.inject.Inject;
 

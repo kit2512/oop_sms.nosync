@@ -214,24 +214,6 @@ public class UserEntity{
         this.userPhone = userPhone;
     }
 
-    public UserModel mapToModel() {
-        return new UserModel(
-                this.userId,
-                this.userUsername,
-                this.userPassword,
-                UserModel.UserRole.valueOf(this.userRole),
-                this.userDateCreated ,
-                this.userDateUpdated ,
-                this.userFirstName ,
-                this.userLastName ,
-                this.userDateOfBirth ,
-                this.userMiddleName ,
-                this.userGender ,
-                this.userAddress ,
-                this.userEmail ,
-                this.userPhone
-        );
-    }
 
     public UserEntity(UserModel model) {
                 this.userId = model.getUserId();

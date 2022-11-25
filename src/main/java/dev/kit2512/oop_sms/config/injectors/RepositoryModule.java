@@ -2,11 +2,6 @@ package dev.kit2512.oop_sms.config.injectors;
 
 import dagger.Module;
 import dagger.Provides;
-import dev.kit2512.oop_sms.data.daos.MajorDao.MajorDao;
-import dev.kit2512.oop_sms.data.daos.ResultDao.ResultDao;
-import dev.kit2512.oop_sms.data.daos.SubjectDao.SubjectDao;
-import dev.kit2512.oop_sms.data.daos.UserDao.UserDao;
-import dev.kit2512.oop_sms.data.repositories.*;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 import dev.kit2512.oop_sms.domain.repositories.MajorRepository.MajorRepository;
 import dev.kit2512.oop_sms.domain.repositories.ResultRepository.ResultRepository;

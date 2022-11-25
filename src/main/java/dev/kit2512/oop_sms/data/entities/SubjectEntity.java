@@ -7,23 +7,25 @@ import com.j256.ormlite.table.DatabaseTable;
 public class SubjectEntity {
     public static final String TABLE_NAME = "subjects";
 
+    public static final String SOLUMN_SUBJECT_CREDITS = "subject_credit";
+
+    public static final String COLUMN_SUBJECT_NAME = "subject_name";
+
     public static final String COLUMN_SUBJECT_ID = "subject_id";
     @DatabaseField(columnName = SubjectEntity.COLUMN_SUBJECT_ID, generatedId = true)
     private Integer subjectId;
 
-    public static final String COLUMN_SUBJECT_NAME = "subject_name";
     @DatabaseField(columnName = SubjectEntity.COLUMN_SUBJECT_NAME)
     private String subjectName;
 
     @DatabaseField(columnName = SubjectEntity.SOLUMN_SUBJECT_CREDITS)
-    public static final String SOLUMN_SUBJECT_CREDITS = "subject_credit";
-    private String subjectCredits;
+    private Integer subjectCredits;
 
     public SubjectEntity() {
 
     }
 
-    public SubjectEntity(Integer subjectId, String subjectName, String subjectCredits) {
+    public SubjectEntity(Integer subjectId, String subjectName, Integer subjectCredits) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.subjectCredits = subjectCredits;
@@ -45,11 +47,11 @@ public class SubjectEntity {
         this.subjectName = subjectName;
     }
 
-    public String getSubjectCredits() {
+    public Integer getSubjectCredits() {
         return subjectCredits;
     }
 
-    public void setSubjectCredits(String subjectCredits) {
+    public void setSubjectCredits(Integer subjectCredits) {
         this.subjectCredits = subjectCredits;
     }
 }

@@ -9,7 +9,7 @@ package dev.kit2512.oop_sms.presentation.views.InfoView;
  * @author h
  */
 public class StudentResultPanel extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form StudentResultPanel
      */
@@ -28,8 +28,6 @@ public class StudentResultPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-
-        setPreferredSize(null);
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setMinimumSize(null);
@@ -58,28 +56,20 @@ public class StudentResultPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jTable1.setColumnSelectionAllowed(true);
         jTable1.setPreferredSize(new java.awt.Dimension(216, 448));
         jTable1.getTableHeader().setResizingAllowed(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

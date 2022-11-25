@@ -4,12 +4,10 @@ import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
-import dev.kit2512.oop_sms.data.SerializableCollectionsType;
 import dev.kit2512.oop_sms.domain.models.ResultModel;
 import dev.kit2512.oop_sms.domain.models.StudentModel;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 
 @DatabaseTable(tableName = StudentEntity.TABLE_NAME)
@@ -49,17 +47,15 @@ public class StudentEntity {
 
     }
 
-    public StudentEntity(Integer yearOfAdmission, String classLetter, UserEntity user, MajorEntity major) {
+    public StudentEntity(Integer yearOfAdmission, String classLetter, MajorEntity major) {
         this.yearOfAdmission = yearOfAdmission;
         this.classLetter = classLetter;
-        this.user = user;
         this.major = major;
     }
 
     public StudentEntity(StudentModel model) {
         this.yearOfAdmission = model.getYearOfAdmission();
         this.classLetter = model.getClassLetter();
-        this.user = new UserEntity(model.getUser());
         this.major = new MajorEntity(model.getMajor());
     }
 
@@ -68,7 +64,6 @@ public class StudentEntity {
         studentModel.setStudentId(this.id);
         studentModel.setMajor(this.major.mapToModel());
         studentModel.setClassLetter(this.classLetter);
-        studentModel.setUser(this.user.mapToModel());
         ArrayList<ResultModel> resultModelArrayList = new ArrayList<>();
         for (ResultEntity resultEntity : this.getResultEntities()) {
             resultModelArrayList.add(resultEntity.mapToModel());

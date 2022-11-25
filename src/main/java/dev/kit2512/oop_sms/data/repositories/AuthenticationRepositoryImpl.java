@@ -55,7 +55,7 @@ public class AuthenticationRepositoryImpl implements AuthenticationRepository {
             final UserEntity userEntity = userDao.queryForFieldValuesArgs(query).get(0);
 
             if (userEntity != null) {
-                setCurrentUser(userEntity.mapToModel());
+                setCurrentUser(new UserModel(userEntity));
                 return getCurrentUser();
             } else {
                 throw new AuthenticationException("Invalid username or password");
