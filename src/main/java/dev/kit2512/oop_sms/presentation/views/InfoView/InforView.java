@@ -8,12 +8,13 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.UIManager;
 
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 
 /**
  *
  * @author h
  */
-public class InforView extends javax.swing.JFrame {
+public class InforView extends javax.swing.JDialog {
 
     /**
      * Creates new form InforView
@@ -30,6 +31,7 @@ public class InforView extends javax.swing.JFrame {
         this.pack();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.setModal(true);
     }
 
     public InforView(String title) {
@@ -73,7 +75,7 @@ public class InforView extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         userInfo.setBorder(javax.swing.BorderFactory.createTitledBorder("User information"));
         userInfo.setLayout(new javax.swing.BoxLayout(userInfo, javax.swing.BoxLayout.LINE_AXIS));
