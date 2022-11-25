@@ -4,7 +4,6 @@
  */
 package dev.kit2512.oop_sms.presentation.views.DashboardView;
 
-import dev.kit2512.oop_sms.App;
 import dev.kit2512.oop_sms.domain.models.StudentModel;
 import dev.kit2512.oop_sms.presentation.controllers.StudentListController;
 import dev.kit2512.oop_sms.presentation.models.DashboardModel;
@@ -65,6 +64,7 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
         setLayout(new java.awt.BorderLayout());
 
         studentListTable.setModel(studentListTableModel);
+        studentListTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         studentListTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 onTableMouseClicked(evt);
@@ -90,8 +90,11 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
     }// </editor-fold>//GEN-END:initComponents
 
     private void onTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onTableMouseClicked
-        final InforView inforView = new InforView();
-        inforView.setVisible(true);
+        if (evt.getClickCount() == 2) {
+            final InforView inforView = new InforView();
+            inforView.setVisible(true);    
+        }
+        
     }//GEN-LAST:event_onTableMouseClicked
 
 

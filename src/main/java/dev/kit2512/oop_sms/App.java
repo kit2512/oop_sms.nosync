@@ -4,6 +4,7 @@
  */
 package dev.kit2512.oop_sms;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import dev.kit2512.oop_sms.config.AppConstants;
@@ -79,7 +80,7 @@ public class App {
     public App() {
         try {
             /* Set the Nimbus look and feel */
-            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.setLookAndFeel(new FlatDarkLaf());
             setUpDaos();
             setUpRepository();
             setUpDagger();
