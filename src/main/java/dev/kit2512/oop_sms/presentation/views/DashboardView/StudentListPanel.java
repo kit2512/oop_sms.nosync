@@ -4,11 +4,12 @@
  */
 package dev.kit2512.oop_sms.presentation.views.DashboardView;
 
+import dev.kit2512.oop_sms.App;
 import dev.kit2512.oop_sms.domain.models.StudentModel;
 import dev.kit2512.oop_sms.presentation.controllers.StudentListController;
 import dev.kit2512.oop_sms.presentation.models.DashboardModel;
-import dev.kit2512.oop_sms.presentation.models.StudentListModel;
 import dev.kit2512.oop_sms.presentation.views.AbstractView;
+import dev.kit2512.oop_sms.presentation.views.InfoView.InforView;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,11 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
         setLayout(new java.awt.BorderLayout());
 
         studentListTable.setModel(studentListTableModel);
+        studentListTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                onTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(studentListTable);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -82,6 +88,11 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
 
         add(jPanel1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void onTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onTableMouseClicked
+        final InforView inforView = new InforView();
+        inforView.setVisible(true);
+    }//GEN-LAST:event_onTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
