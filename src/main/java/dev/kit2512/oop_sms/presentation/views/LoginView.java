@@ -14,9 +14,6 @@ import dev.kit2512.oop_sms.presentation.views.InfoView.InforView;
 
 import java.beans.PropertyChangeEvent;
 import javax.inject.Inject;
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -69,11 +66,9 @@ public class LoginView extends javax.swing.JFrame implements AbstractView {
 
         usernameLabel.setText("Username");
 
-        usernameTxt.getDocument().addDocumentListener(new UsernameTextListener());
 
         jLabel1.setText("Password");
 
-        passwordTxt.getDocument().addDocumentListener(new PasswordTextListener());
 
         loginBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         loginBtn.setText("GO >>");
@@ -149,6 +144,8 @@ public class LoginView extends javax.swing.JFrame implements AbstractView {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        controller.elementPasswordChanged(String.valueOf(passwordTxt.getPassword()));
+        controller.elementUserNameChanged(String.valueOf(usernameTxt.getText()));
         controller.elementLoginButtonPressed();
     }//GEN-LAST:event_loginBtnActionPerformed
 
@@ -220,9 +217,7 @@ public class LoginView extends javax.swing.JFrame implements AbstractView {
                     case ADMIN, STAFF -> {
                         final DashboardController dashboardController = App.appGraph.getDashboardController();
                         final DashboardView dashboardView = App.appGraph.getDashboardView();
-//                        dashboardController.addView(dashboardView);
                         dashboardView.setVisible(true);
-                        dashboardView.fetchStudentList();
                     }
                     case STUDENT -> {
                         final InforView userInformationView = new InforView();
@@ -233,53 +228,6 @@ public class LoginView extends javax.swing.JFrame implements AbstractView {
         }
     }
     
-    private class UsernameTextListener implements DocumentListener {
-
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-            listen(e);
-        }
-
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-                        listen(e);
-
-        }
-
-        @Override
-        public void changedUpdate(DocumentEvent e) {
-                        listen(e);
-
-        }
-        
-        private void listen(DocumentEvent e) {
-           final String newValue = usernameTxt.getText();
-           controller.elementUserNameChanged(newValue);
-        }
-    }
-    
-    private class PasswordTextListener implements DocumentListener {
-
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-            listen(e);
-        }
-
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-            listen(e);
-        }
-
-        @Override
-        public void changedUpdate(DocumentEvent e) {
-            listen(e);
-        }
-        
-        private void listen(DocumentEvent e) {
-           final String newValue = String.valueOf(passwordTxt.getPassword());
-           controller.elementPasswordChanged(newValue);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel errorMessageLabel;

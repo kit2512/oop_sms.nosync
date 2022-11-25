@@ -4,20 +4,17 @@
  */
 package dev.kit2512.oop_sms.presentation.controllers;
 
-import dev.kit2512.oop_sms.presentation.models.DashboardModel;
-
+import dev.kit2512.oop_sms.presentation.models.StaffListModel;
 import javax.inject.Inject;
 
 /**
  *
  * @author macpro13
  */
-public class DashboardController extends AbstractController {
-
-    @Inject DashboardController(DashboardModel dashBoardModel) {
-        super();
-        addModel(dashBoardModel);
+public class StaffListController extends AbstractController {
+    
+    @Inject
+    public StaffListController(StaffListModel staff) {
+        
     }
-
-
 }

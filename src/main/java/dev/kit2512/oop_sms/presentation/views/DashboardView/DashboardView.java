@@ -5,19 +5,14 @@
 package dev.kit2512.oop_sms.presentation.views.DashboardView;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import dev.kit2512.oop_sms.domain.models.StudentModel;
 import dev.kit2512.oop_sms.presentation.controllers.DashboardController;
-import dev.kit2512.oop_sms.presentation.models.DashboardModel;
 import dev.kit2512.oop_sms.presentation.views.AbstractView;
 import java.beans.PropertyChangeEvent;
-import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Inject;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,17 +20,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DashboardView extends javax.swing.JFrame implements AbstractView {
     private DashboardController controller;
+    private StudentListPanel studentListPanel;
+    
+    private StaffListPanel staffListPanel;
 
-    private DefaultTableModel studentListTableModel;
-    private DefaultTableModel staffListTableModel;
     
     /**
      * Creates new form DashboardView
+     * @param controller
      */
     @Inject
-    public DashboardView(DashboardController controller) {
+    public DashboardView(DashboardController controller, StudentListPanel studentListPanel, StaffListPanel staffListPanel) {
         this.controller = controller;
-        initTableModel();
+        this.studentListPanel = studentListPanel;
+        this.staffListPanel = staffListPanel;
         initComponents();
         this.setLocationRelativeTo(null);
         addView();
@@ -43,11 +41,11 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
 
     private void addView() {
         controller.addView(this);
+        this.tabPane.addTab("Students", studentListPanel);
+        
+        this.tabPane.addTab("Staffs", staffListPanel);
     }
 
-    public void fetchStudentList() {
-        this.controller.elementFetchingStudentListChanged(true);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,22 +57,6 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
     private void initComponents() {
 
         tabPane = new javax.swing.JTabbedPane();
-        studentsPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        addStudenBtn = new javax.swing.JButton();
-        importExcelStudentBtn = new javax.swing.JButton();
-        editStudentInfoBtn = new javax.swing.JButton();
-        removeStudentBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        studentListTable = new javax.swing.JTable();
-        staffListPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         editMenu = new javax.swing.JMenu();
@@ -85,69 +67,6 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
                 formWindowClosing(evt);
             }
         });
-
-        studentsPanel.setName("Studens"); // NOI18N
-        studentsPanel.setLayout(new java.awt.BorderLayout());
-
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
-
-        addStudenBtn.setText("Add student");
-        jPanel1.add(addStudenBtn);
-
-        importExcelStudentBtn.setText("Import from Excel");
-        jPanel1.add(importExcelStudentBtn);
-
-        editStudentInfoBtn.setText("Edit Information");
-        jPanel1.add(editStudentInfoBtn);
-
-        removeStudentBtn.setText("Remove");
-        jPanel1.add(removeStudentBtn);
-
-        studentsPanel.add(jPanel1, java.awt.BorderLayout.SOUTH);
-
-        jScrollPane1.setAutoscrolls(true);
-
-        studentListTable.setModel(studentListTableModel);
-        jScrollPane1.setViewportView(studentListTable);
-
-        studentsPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
-
-        tabPane.addTab("Students", studentsPanel);
-
-        staffListPanel.setLayout(new java.awt.BorderLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
-        staffListPanel.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
-
-        jButton5.setText("Add Stuff");
-        jPanel2.add(jButton5);
-
-        jButton6.setText("Import from Excel");
-        jPanel2.add(jButton6);
-
-        jButton7.setText("Remove");
-        jPanel2.add(jButton7);
-
-        jButton8.setText("Update information");
-        jPanel2.add(jButton8);
-
-        staffListPanel.add(jPanel2, java.awt.BorderLayout.PAGE_END);
-
-        tabPane.addTab("Staffs", staffListPanel);
 
         fileMenu.setText("File");
         jMenuBar1.add(fileMenu);
@@ -166,9 +85,8 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tabPane)
-                .addContainerGap())
+                .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,85 +118,17 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addStudenBtn;
     private javax.swing.JMenu editMenu;
-    private javax.swing.JButton editStudentInfoBtn;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JButton importExcelStudentBtn;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JButton removeStudentBtn;
-    private javax.swing.JPanel staffListPanel;
-    private javax.swing.JTable studentListTable;
-    private javax.swing.JPanel studentsPanel;
     private javax.swing.JTabbedPane tabPane;
     // End of variables declaration//GEN-END:variables
 
     
-    private void initTableModel() {
-        this.studentListTableModel = new DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Name", "Major", "Gender", "Class", "Address", "Email", "Phone Number", "GPA"
-            } 
-        ){
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false, true, false, true
-            };
-
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        };
-    }
-    
     
     @Override
     public void modelPropertyChange(PropertyChangeEvent event) {
-        switch (event.getPropertyName()) {
-            case DashboardModel.ERROR_MESSAGE_PROPERTY -> JOptionPane.showMessageDialog(this, (String) event.getNewValue(), "Error", 1);
-            case DashboardModel.STUDENT_LIST_PROPERTY -> {
-                this.studentListTableModel.setRowCount(0);
-                final List<StudentModel> studentList = (List<StudentModel>) event.getNewValue();
-                mapStudentModelToTableRow(studentList);
-                this.studentListTable.setModel(this.studentListTableModel);
-            }
-        }
+        
     }
     
-    private void mapStudentModelToTableRow(List<StudentModel> studentList) {
-        for (StudentModel student : studentList) {
-            final ArrayList<Object> row = new ArrayList<>();
-            row.add(student.getStudentFullId());
-            row.add(student.getFullName());
-            row.add(student.getMajor().getName());
-            row.add(student.getUserGender() ? "Male" : "Female");
-            row.add(student.getClassLetter());
-            row.add(student.getUserAddress());
-            row.add(student.getUserEmail());
-            row.add(student.getUserPhone());
-            row.add(student.getGPA());
-            this.studentListTableModel.addRow(row.toArray());
-        }
-    }
-
 }
