@@ -52,14 +52,14 @@ public class InforView extends javax.swing.JDialog {
         image = new javax.swing.JPanel();
         studyResults = new javax.swing.JPanel();
         actions = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        editScoreBtn = new javax.swing.JButton();
+        changePasswordBtn = new javax.swing.JButton();
+        resetPasswordBtn = new javax.swing.JButton();
+        editInformationBtn = new javax.swing.JButton();
+        deleteUserBtn = new javax.swing.JButton();
+        addResultBtn = new javax.swing.JButton();
         removeResultBtn = new javax.swing.JButton();
         updateResultBtn = new javax.swing.JButton();
-        updateResultBtn1 = new javax.swing.JButton();
+        calGPABtn = new javax.swing.JButton();
         studentInfo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -90,41 +90,41 @@ public class InforView extends javax.swing.JDialog {
 
         actions.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
 
-        jButton1.setText("Change password");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        changePasswordBtn.setText("Change password");
+        changePasswordBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                changePasswordBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Reset password");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        resetPasswordBtn.setText("Reset password");
+        resetPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                resetPasswordBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Edit Information");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        editInformationBtn.setText("Edit Information");
+        editInformationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                editInformationBtnActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Delete user");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        deleteUserBtn.setText("Delete user");
+        deleteUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                deleteUserBtnActionPerformed(evt);
             }
         });
 
-        editScoreBtn.setText("Add result");
+        addResultBtn.setText("Add result");
 
         removeResultBtn.setText("Remove result");
 
         updateResultBtn.setText("Update result");
 
-        updateResultBtn1.setText("Calculate GPA");
+        calGPABtn.setText("Calculate GPA");
 
         javax.swing.GroupLayout actionsLayout = new javax.swing.GroupLayout(actions);
         actions.setLayout(actionsLayout);
@@ -133,35 +133,35 @@ public class InforView extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(actionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(updateResultBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(calGPABtn, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                     .addComponent(updateResultBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(removeResultBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editScoreBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addResultBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(changePasswordBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(resetPasswordBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(editInformationBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         actionsLayout.setVerticalGroup(
             actionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(actionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(changePasswordBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(resetPasswordBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(editInformationBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
+                .addComponent(deleteUserBtn)
                 .addGap(214, 214, 214)
-                .addComponent(editScoreBtn)
+                .addComponent(addResultBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(removeResultBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(updateResultBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(updateResultBtn1)
+                .addComponent(calGPABtn)
                 .addContainerGap(124, Short.MAX_VALUE))
         );
 
@@ -218,21 +218,21 @@ public class InforView extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void changePasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_changePasswordBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void resetPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPasswordBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_resetPasswordBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void editInformationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editInformationBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_editInformationBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void deleteUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_deleteUserBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,19 +253,19 @@ public class InforView extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actions;
-    private javax.swing.JButton editScoreBtn;
+    private javax.swing.JButton addResultBtn;
+    private javax.swing.JButton calGPABtn;
+    private javax.swing.JButton changePasswordBtn;
+    private javax.swing.JButton deleteUserBtn;
+    private javax.swing.JButton editInformationBtn;
     private javax.swing.JPanel image;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton removeResultBtn;
+    private javax.swing.JButton resetPasswordBtn;
     private javax.swing.JPanel studentInfo;
     private javax.swing.JPanel studyResults;
     private javax.swing.JButton updateResultBtn;
-    private javax.swing.JButton updateResultBtn1;
     private javax.swing.JPanel userInfo;
     // End of variables declaration//GEN-END:variables
 }
