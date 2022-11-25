@@ -4,8 +4,14 @@
  */
 package dev.kit2512.oop_sms.presentation.views;
 
+import dev.kit2512.oop_sms.App;
+import dev.kit2512.oop_sms.domain.models.UserModel;
+import dev.kit2512.oop_sms.presentation.controllers.DashboardController;
 import dev.kit2512.oop_sms.presentation.controllers.LoginController;
 import dev.kit2512.oop_sms.presentation.models.LoginModel;
+import dev.kit2512.oop_sms.presentation.views.DashboardView.DashboardView;
+import dev.kit2512.oop_sms.presentation.views.InfoView.InforView;
+
 import java.beans.PropertyChangeEvent;
 import javax.inject.Inject;
 import javax.swing.*;
@@ -200,7 +206,28 @@ public class LoginView extends javax.swing.JFrame implements AbstractView {
 
             case LoginModel.SUCCESS_PROPERTY -> {
                 if ((boolean) event.getNewValue()) {
-                    JOptionPane.showMessageDialog(this, "Login Successful");
+                    this.usernameTxt.setText(null);
+                    this.passwordTxt.setText(null);
+                    this.errorMessageLabel.setText(null);
+                }
+            }
+
+            case LoginModel.USER_PROPERTY ->  {
+                final UserModel user = (UserModel) event.getNewValue();
+                this.setVisible(false);
+                this.dispose();
+                switch (user.getUserRole()) {
+                    case ADMIN, STAFF -> {
+                        final DashboardController dashboardController = App.appGraph.getDashboardController();
+                        final DashboardView dashboardView = App.appGraph.getDashboardView();
+//                        dashboardController.addView(dashboardView);
+                        dashboardView.setVisible(true);
+                        dashboardView.fetchStudentList();
+                    }
+                    case STUDENT -> {
+                        final InforView userInformationView = new InforView();
+                        userInformationView.setVisible(true);
+                    }
                 }
             }
         }

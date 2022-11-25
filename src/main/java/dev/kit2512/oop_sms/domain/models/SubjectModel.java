@@ -1,14 +1,22 @@
 package dev.kit2512.oop_sms.domain.models;
 
+import dev.kit2512.oop_sms.data.entities.SubjectEntity;
+
 public class SubjectModel {
     private Integer subjectId;
     private String subjectName;
-    private String subjectCredits;
+    private Integer subjectCredits;
 
-    public SubjectModel(Integer subjectId, String subjectName, String subjectCredits) {
+    public SubjectModel(Integer subjectId, String subjectName, Integer subjectCredits) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.subjectCredits = subjectCredits;
+    }
+
+    public SubjectModel(SubjectEntity subjectEntity) {
+        this.subjectId = subjectEntity.getSubjectId();
+        this.subjectName = subjectEntity.getSubjectName();
+        this.subjectCredits = subjectEntity.getSubjectCredits();
     }
 
     public Integer getSubjectId() {
@@ -27,11 +35,11 @@ public class SubjectModel {
         this.subjectName = subjectName;
     }
 
-    public String getSubjectCredits() {
+    public Integer getSubjectCredits() {
         return subjectCredits;
     }
 
-    public void setSubjectCredits(String subjectCredits) {
+    public void setSubjectCredits(Integer subjectCredits) {
         this.subjectCredits = subjectCredits;
     }
 }

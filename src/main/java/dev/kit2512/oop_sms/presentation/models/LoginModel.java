@@ -2,6 +2,7 @@ package dev.kit2512.oop_sms.presentation.models;
 
 import dev.kit2512.oop_sms.config.AppConstants;
 import dev.kit2512.oop_sms.config.exceptions.LoginException;
+import dev.kit2512.oop_sms.domain.models.UserModel;
 import dev.kit2512.oop_sms.domain.usecases.LoginUseCase;
 
 import javax.inject.Inject;
@@ -24,10 +25,15 @@ public class LoginModel extends AbstractModel {
     public static final String IS_LOADING_PROPERTY = "IsLoading";
     public static final String SUCCESS_PROPERTY = "Success";
 
+    public static final String USER_PROPERTY = "User";
     private String username;
     private String password;
     private String errorMessage;
     private boolean success;
+
+
+
+    private UserModel user;
 
     private final LoginUseCase loginUseCase;
 
@@ -82,15 +88,21 @@ public class LoginModel extends AbstractModel {
                 throw new LoginException("Password must be at least 8 characters");
             }
 
-            loginUseCase.excecute(this.username, this.password);
+            final UserModel userModel = loginUseCase.excecute(this.username, this.password);
             setErrorMessage(null);
             setSuccess(true);
-
+            setUser(userModel);
         } catch (LoginException ex) {
             setSuccess(false);
             setErrorMessage(ex.getMessage());
             ex.printStackTrace();
         }
         super.firePropertyChange(IS_LOADING_PROPERTY, isLoading, !isLoading);
+    }
+
+    public void setUser(UserModel user) {
+        final UserModel oldValue = this.user;
+        this.user = user;
+        firePropertyChange(USER_PROPERTY, oldValue, user);
     }
 }

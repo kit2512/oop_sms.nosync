@@ -1,38 +1,34 @@
 package dev.kit2512.oop_sms.domain.models;
 
-import dev.kit2512.oop_sms.data.entities.StudentEntity;
+import dev.kit2512.oop_sms.data.entities.ResultEntity;
 import dev.kit2512.oop_sms.data.entities.SubjectEntity;
 
-public class ResultModel {
-    private Integer resultId;
 
+public class ResultModel {
     private Integer studentId;
 
-    private Integer subjectId;
+    private Integer resultId;
+
+    private SubjectModel subject;
 
     private Float resultScore;
 
-    private String subjectName;
 
-    public ResultModel(Integer resultId, Integer studentId, Integer subjectId, String subjectName, Float resultScore) {
-        this.resultId = resultId;
+    public ResultModel(Integer resultId, Integer studentId, SubjectModel subject, Float resultScore) {
         this.studentId = studentId;
-        this.subjectId = subjectId;
-        this.subjectName = subjectName;
+        this.resultId = resultId;
+        this.subject = subject;
         this.resultScore = resultScore;
     }
 
     public ResultModel() {
 
     }
-
-
-    public Integer getResultId() {
-        return resultId;
-    }
-
-    public void setResultId(Integer resultId) {
-        this.resultId = resultId;
+    
+    public ResultModel(ResultEntity resultEntity) {
+        this.resultId = resultEntity.getResultId();
+        this.subject = new SubjectModel(resultEntity.getSubjectEntity());
+        this.resultScore = resultEntity.getResultScore();
     }
 
     public Integer getStudentId() {
@@ -43,12 +39,20 @@ public class ResultModel {
         this.studentId = studentId;
     }
 
-    public Integer getSubjectId() {
-        return subjectId;
+    public Integer getResultId() {
+        return resultId;
     }
 
-    public void setSubjectId(Integer subjectId) {
-        this.subjectId = subjectId;
+    public void setResultId(Integer resultId) {
+        this.resultId = resultId;
+    }
+
+    public SubjectModel getSubject() {
+        return subject;
+    }
+
+    public void setSubject(SubjectModel subject) {
+        this.subject = subject;
     }
 
     public Float getResultScore() {
@@ -57,13 +61,5 @@ public class ResultModel {
 
     public void setResultScore(Float resultScore) {
         this.resultScore = resultScore;
-    }
-
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
     }
 }

@@ -1,12 +1,13 @@
 package dev.kit2512.oop_sms.domain.models;
 
+import com.j256.ormlite.dao.ForeignCollection;
+import dev.kit2512.oop_sms.data.entities.ResultEntity;
+import dev.kit2512.oop_sms.data.entities.StudentEntity;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class StudentModel{
-
-
-    private UserModel user;
+public class StudentModel extends UserModel{
 
     private Integer studentId;
 
@@ -25,8 +26,7 @@ public class StudentModel{
     }
 
     private List<ResultModel> results;
-    public StudentModel(Integer studetnId, UserModel user, Integer yearOfAdmission, MajorModel major, String classLetter, List<ResultModel> results) {
-        this.user = user;
+    public StudentModel(Integer studetnId, Integer yearOfAdmission, MajorModel major, String classLetter, List<ResultModel> results) {
         this.studentId = studetnId;
         this.yearOfAdmission = yearOfAdmission;
         this.major = major;
@@ -35,6 +35,20 @@ public class StudentModel{
     }
 
     public StudentModel() {
+    }
+    
+    public StudentModel(StudentEntity studentEntity) {
+        super(studentEntity.getUser());
+        this.studentId = studentEntity.getId();
+        this.yearOfAdmission = studentEntity.getYearOfAdmission();
+        this.major = new MajorModel(studentEntity.getMajor());
+        this.classLetter = studentEntity.getClassLetter();
+        this.results = new ArrayList<>();
+        final ForeignCollection<ResultEntity> resultEntities = studentEntity.getResultEntities();
+        for (ResultEntity resultEntity : resultEntities) {
+            final ResultModel resultModel = new ResultModel(resultEntity);
+            this.results.add(new ResultModel(resultEntity));
+        }
     }
 
     public Integer getYearOfAdmission() {
@@ -49,18 +63,10 @@ public class StudentModel{
     public String getStudentFullId() {
         final Integer currentYear = Calendar.getInstance().get(Calendar.YEAR) - 1900;
         final Integer yearOfAdmission = this.getYearOfAdmission();
-        final Integer year = currentYear - yearOfAdmission + 1;
+        final Integer year = yearOfAdmission - this.major.getYearOfEstablishment() + 1;
         final String majorCode = this.getMajor().getCode();
 
         return String.format("%s%d%03d", majorCode, year, this.studentId);
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
     }
 
     public Integer getStudentId() {
@@ -85,5 +91,15 @@ public class StudentModel{
 
     public void setClassLetter(String classLetter) {
         this.classLetter = classLetter;
+    }
+
+    public Float getGPA() {
+        Float totalGrade = 0f;
+        Integer totalCredit = 0;
+        for (ResultModel result : this.results) {
+            totalGrade += result.getResultScore() * (float)result.getSubject().getSubjectCredits();
+            totalCredit += result.getSubject().getSubjectCredits();
+        }
+        return totalGrade / totalCredit;
     }
 }
