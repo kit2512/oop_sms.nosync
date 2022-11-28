@@ -1,13 +1,10 @@
 package dev.kit2512.oop_sms.presentation.models;
 
-import dev.kit2512.oop_sms.config.AppConstants;
 import dev.kit2512.oop_sms.config.exceptions.LoginException;
-import dev.kit2512.oop_sms.domain.models.UserModel;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.usecases.LoginUseCase;
 
 import javax.inject.Inject;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -33,7 +30,7 @@ public class LoginModel extends AbstractModel {
 
 
 
-    private UserModel user;
+    private UserEntity user;
 
     private final LoginUseCase loginUseCase;
 
@@ -88,10 +85,10 @@ public class LoginModel extends AbstractModel {
                 throw new LoginException("Password must be at least 8 characters");
             }
 
-            final UserModel userModel = loginUseCase.excecute(this.username, this.password);
+            final UserEntity userEntity = loginUseCase.excecute(this.username, this.password);
             setErrorMessage(null);
             setSuccess(true);
-            setUser(userModel);
+            setUser(userEntity);
         } catch (LoginException ex) {
             setSuccess(false);
             setErrorMessage(ex.getMessage());
@@ -100,8 +97,8 @@ public class LoginModel extends AbstractModel {
         super.firePropertyChange(IS_LOADING_PROPERTY, isLoading, !isLoading);
     }
 
-    public void setUser(UserModel user) {
-        final UserModel oldValue = this.user;
+    public void setUser(UserEntity user) {
+        final UserEntity oldValue = this.user;
         this.user = user;
         firePropertyChange(USER_PROPERTY, oldValue, user);
     }

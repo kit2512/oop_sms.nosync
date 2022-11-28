@@ -4,7 +4,7 @@
  */
 package dev.kit2512.oop_sms.domain.repositories.StudentRespository;
 
-import dev.kit2512.oop_sms.domain.models.StudentModel;
+import dev.kit2512.oop_sms.domain.entities.StudentEntity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,13 +14,13 @@ import java.util.List;
  * @author macpro13
  */
 public interface StudentRepository {
-    List<StudentModel> getStudents() throws StudentException;
+    List<StudentEntity> getStudents() throws StudentException;
 
-    List<StudentModel> getStudents(HashMap<String, Object> filter) throws StudentException;
+    List<StudentEntity> getStudents(HashMap<String, Object> filter) throws StudentException;
 
-    StudentModel removeUser(StudentModel userEntity) throws StudentException;
+    StudentEntity removeUser(StudentEntity userEntity) throws StudentException;
 
-    StudentModel addUser(StudentModel userEntity) throws StudentException;
+    StudentEntity addUser(StudentEntity userEntity) throws StudentException;
 
-    StudentModel updateUser(StudentModel oldStudentModel, StudentModel newStudentModel) throws StudentException;
+    StudentEntity updateUser(StudentEntity oldStudentModel, StudentEntity newStudentModel) throws StudentException;
 }

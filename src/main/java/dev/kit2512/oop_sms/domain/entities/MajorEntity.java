@@ -1,8 +1,8 @@
-package dev.kit2512.oop_sms.domain.models;
+package dev.kit2512.oop_sms.domain.entities;
 
-import dev.kit2512.oop_sms.data.entities.MajorEntity;
+import dev.kit2512.oop_sms.data.models.MajorModel;
 
-public class MajorModel extends BaseModel{
+public class MajorEntity extends BaseEntity {
     private Integer id;
     private String name;
     private String code;
@@ -17,18 +17,11 @@ public class MajorModel extends BaseModel{
 
     private Integer yearOfEstablishment;
 
-    public MajorModel(Integer id, String name, String code, Integer yearOfEstablishment) {
+    public MajorEntity(Integer id, String name, String code, Integer yearOfEstablishment) {
         this.id = id;
         this.name = name;
         this.code = code.toUpperCase();
         this.yearOfEstablishment = yearOfEstablishment;
-    }
-    
-    public MajorModel(MajorEntity majorEntity) {
-        this.id = majorEntity.getMajorId();
-        this.name = majorEntity.getMajorName();
-        this.code = majorEntity.getMajorCode();
-        this.yearOfEstablishment = majorEntity.getYearOfEstablishment();
     }
 
     public Integer getId() {

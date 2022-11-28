@@ -4,19 +4,18 @@
  */
 package dev.kit2512.oop_sms.domain.usecases;
 
-import dev.kit2512.oop_sms.domain.models.StudentModel;
+import dev.kit2512.oop_sms.domain.entities.StudentEntity;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentException;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Inject;
 
 /**
  *
  * @author macpro13
  */
-public class GetStudentListUseCase implements BaseUseCase<ArrayList<StudentModel>> {
+public class GetStudentListUseCase implements BaseUseCase<ArrayList<StudentEntity>> {
     final private StudentRepository studentRepositroy;
 
     @Inject
@@ -24,7 +23,7 @@ public class GetStudentListUseCase implements BaseUseCase<ArrayList<StudentModel
         this.studentRepositroy = studentRepositroy;
     }
     
-    public ArrayList<StudentModel> execute() throws StudentException {
+    public ArrayList<StudentEntity> execute() throws StudentException {
        return new ArrayList<>(studentRepositroy.getStudents());
     }
     

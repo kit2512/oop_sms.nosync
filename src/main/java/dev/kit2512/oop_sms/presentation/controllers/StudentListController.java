@@ -4,13 +4,9 @@
  */
 package dev.kit2512.oop_sms.presentation.controllers;
 
-import dev.kit2512.oop_sms.domain.models.StudentModel;
-import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentRepository;
 import dev.kit2512.oop_sms.presentation.models.DashboardModel;
 import dev.kit2512.oop_sms.presentation.models.StudentListModel;
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

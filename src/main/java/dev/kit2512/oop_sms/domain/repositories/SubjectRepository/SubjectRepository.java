@@ -1,18 +1,18 @@
 package dev.kit2512.oop_sms.domain.repositories.SubjectRepository;
 
-import dev.kit2512.oop_sms.domain.models.SubjectModel;
+import dev.kit2512.oop_sms.domain.entities.SubjectEntity;
 
 import java.util.HashMap;
 import java.util.List;
 
 public interface SubjectRepository {
-    List<SubjectModel> getUsers() throws SubjectException;
+    List<SubjectEntity> getUsers() throws SubjectException;
 
-    List<SubjectModel> getUsers(HashMap<String, Object> filter) throws SubjectException;
+    List<SubjectEntity> getUsers(HashMap<String, Object> filter) throws SubjectException;
 
-    SubjectModel removeUser(SubjectModel userEntity) throws SubjectException;
+    SubjectEntity removeUser(SubjectEntity userEntity) throws SubjectException;
 
-    SubjectModel addUser(SubjectModel userEntity) throws SubjectException;
+    SubjectEntity addUser(SubjectEntity userEntity) throws SubjectException;
 
-    SubjectModel updateUser(SubjectModel oldSubjectModel, SubjectModel newSubjectModel) throws SubjectException;
+    SubjectEntity updateUser(SubjectEntity oldSubjectEntity, SubjectEntity newSubjectEntity) throws SubjectException;
 }

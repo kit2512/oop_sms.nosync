@@ -1,12 +1,12 @@
-package dev.kit2512.oop_sms.data.entities;
+package dev.kit2512.oop_sms.data.models;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import dev.kit2512.oop_sms.domain.models.MajorModel;
+import dev.kit2512.oop_sms.domain.entities.MajorEntity;
 
-@DatabaseTable(tableName = MajorEntity.TABLE_NAME)
-public class MajorEntity {
+@DatabaseTable(tableName = MajorModel.TABLE_NAME)
+public class MajorModel {
     public final static String TABLE_NAME = "majors";
 
     public final static String COLUMN_MAJOR_ID = "major_id";
@@ -17,36 +17,36 @@ public class MajorEntity {
 
     public final static String COLUMN_YEAR_OF_ESTABLISHMENT = "major_year_of_establishment";
 
-    @DatabaseField(columnName = MajorEntity.COLUMN_MAJOR_ID, generatedId = true)
+    @DatabaseField(columnName = MajorModel.COLUMN_MAJOR_ID, generatedId = true)
     private Integer majorId;
 
-    @DatabaseField(columnName = MajorEntity.COLUMN_MAJOR_NAME, canBeNull = false, dataType = DataType.STRING)
+    @DatabaseField(columnName = MajorModel.COLUMN_MAJOR_NAME, canBeNull = false, dataType = DataType.STRING)
     private String majorName;
 
-    @DatabaseField(columnName = MajorEntity.COLUMN_MAJOR_CODE, canBeNull = false)
+    @DatabaseField(columnName = MajorModel.COLUMN_MAJOR_CODE, canBeNull = false)
     private String majorCode;
 
-    @DatabaseField(columnName = MajorEntity.COLUMN_YEAR_OF_ESTABLISHMENT, canBeNull = false)
+    @DatabaseField(columnName = MajorModel.COLUMN_YEAR_OF_ESTABLISHMENT, canBeNull = false)
     private Integer yearOfEstablishment;
 
-    public MajorEntity() {
+    public MajorModel() {
     }
 
-    public MajorEntity(String majorName, String majorCode, Integer yearOfEstablishment) {
+    public MajorModel(String majorName, String majorCode, Integer yearOfEstablishment) {
         this.majorName = majorName;
         this.majorCode = majorCode;
         this.yearOfEstablishment = yearOfEstablishment;
     }
 
-    public MajorModel mapToModel() {
-        return new MajorModel(majorId, majorName, majorCode, yearOfEstablishment);
+    public MajorModel(MajorEntity majorEntity) {
+        this.majorId = majorEntity.getId();
+        this.majorName = majorEntity.getName();
+        this.majorCode = majorEntity.getCode();
+        this.yearOfEstablishment = majorEntity.getYearOfEstablishment();
     }
 
-    public MajorEntity(MajorModel majorModel) {
-        this.majorId = majorModel.getId();
-        this.majorName = majorModel.getName();
-        this.majorCode = majorModel.getCode();
-        this.yearOfEstablishment = majorModel.getYearOfEstablishment();
+    public MajorEntity mapToEntity() {
+        return new MajorEntity(majorId, majorName, majorCode, yearOfEstablishment);
     }
 
     public Integer getMajorId() {

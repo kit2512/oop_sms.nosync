@@ -5,11 +5,10 @@ import dev.kit2512.oop_sms.data.daos.ResultDao.ResultDao;
 import dev.kit2512.oop_sms.data.daos.StudentDao.StudentDao;
 import dev.kit2512.oop_sms.data.daos.SubjectDao.SubjectDao;
 import dev.kit2512.oop_sms.data.daos.UserDao.UserDao;
-import dev.kit2512.oop_sms.data.entities.ResultEntity;
-import dev.kit2512.oop_sms.data.entities.StudentEntity;
-import dev.kit2512.oop_sms.data.entities.SubjectEntity;
-import dev.kit2512.oop_sms.domain.models.ResultModel;
-import dev.kit2512.oop_sms.domain.models.StudentModel;
+import dev.kit2512.oop_sms.data.models.ResultModel;
+import dev.kit2512.oop_sms.data.models.StudentModel;
+import dev.kit2512.oop_sms.domain.entities.ResultEntity;
+import dev.kit2512.oop_sms.domain.entities.StudentEntity;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentException;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentRepository;
 import java.sql.SQLException;
@@ -39,51 +38,50 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public List<StudentModel> getStudents() throws StudentException {
-        final List<StudentModel> studentModels = new ArrayList<>();
+    public List<StudentEntity> getStudents() throws StudentException {
+        final List<StudentEntity> studentEntities = new ArrayList<>();
         
         try {
-            final List<StudentEntity> studentEntities = studentDao.queryForAll();
+            final List<StudentModel> studentModelList = studentDao.queryForAll();
 
+            for (StudentModel studentModel : studentModelList) {
+                userDao.refresh(studentModel.getUser());
+                majorDao.refresh(studentModel.getMajor());
 
-            for (StudentEntity studentEntity : studentEntities) {
-                userDao.refresh(studentEntity.getUser());
-                majorDao.refresh(studentEntity.getMajor());
+                final StudentEntity studentEntity = studentModel.mapToEntity();
+                final ArrayList<ResultEntity> resultEntities = new ArrayList<>();
 
-                final StudentModel studentModel = new StudentModel(studentEntity);
-                final ArrayList<ResultModel> resultModels = new ArrayList<>();
-
-                for (ResultEntity resultEntity : studentEntity.getResultEntities()) {
-                    resultDao.refresh(resultEntity);
-                    subjectDao.refresh(resultEntity.getSubjectEntity());
-                    resultModels.add(new ResultModel(resultEntity));
+                for (ResultModel resultModel : studentModel.getResultEntities()) {
+                    resultDao.refresh(resultModel);
+                    subjectDao.refresh(resultModel.getSubjectEntity());
+                    resultEntities.add(resultModel.mapToEntity());
                 }
-                studentModel.setResults(resultModels);
-                studentModels.add(studentModel);
+                studentEntity.setResults(resultEntities);
+                studentEntities.add(studentEntity);
             }
         } catch (SQLException ex) {
             throw new StudentException("Unable to get students");
         }
-        return studentModels;
+        return studentEntities;
     }
 
     @Override
-    public List<StudentModel> getStudents(HashMap<String, Object> filter) throws StudentException {
+    public List<StudentEntity> getStudents(HashMap<String, Object> filter) throws StudentException {
         return null;
     }
 
     @Override
-    public StudentModel removeUser(StudentModel userEntity) throws StudentException {
+    public StudentEntity removeUser(StudentEntity userEntity) throws StudentException {
         return null;
     }
 
     @Override
-    public StudentModel addUser(StudentModel userEntity) throws StudentException {
+    public StudentEntity addUser(StudentEntity userEntity) throws StudentException {
         return null;
     }
 
     @Override
-    public StudentModel updateUser(StudentModel oldStudentModel, StudentModel newStudentModel) throws StudentException {
+    public StudentEntity updateUser(StudentEntity oldStudentModel, StudentEntity newStudentModel) throws StudentException {
         return null;
     }
    

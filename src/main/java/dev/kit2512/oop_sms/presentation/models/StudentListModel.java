@@ -4,7 +4,7 @@
  */
 package dev.kit2512.oop_sms.presentation.models;
 
-import dev.kit2512.oop_sms.domain.models.StudentModel;
+import dev.kit2512.oop_sms.domain.entities.StudentEntity;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentException;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentRepository;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @author macpro13
  */
 public class StudentListModel extends AbstractModel{
-    private List<StudentModel> studentList = new ArrayList<>();
+    private List<StudentEntity> studentList = new ArrayList<>();
 
     private StudentRepository studentRepository;
 
@@ -47,12 +47,12 @@ public class StudentListModel extends AbstractModel{
         super.firePropertyChange(ERROR_MESSAGE_PROPERTY, oldValue, oldValue);
     }
 
-    public List<StudentModel> getStudentList() {
+    public List<StudentEntity> getStudentList() {
         return studentList;
     }
 
-    public void setStudentList(List<StudentModel> studentList) {
-        List<StudentModel> oldValue = this.studentList;
+    public void setStudentList(List<StudentEntity> studentList) {
+        List<StudentEntity> oldValue = this.studentList;
         this.studentList = studentList;
         super.firePropertyChange(STUDENT_LIST_PROPERTY, oldValue, studentList);
     }

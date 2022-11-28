@@ -1,10 +1,11 @@
-package dev.kit2512.oop_sms.domain.models;
+package dev.kit2512.oop_sms.domain.entities;
 
 
-import dev.kit2512.oop_sms.data.entities.UserEntity;
+import dev.kit2512.oop_sms.data.models.UserModel;
+
 import java.util.Date;
 
-public class UserModel{
+public class UserEntity {
     public String getFullName() {
         return this.userFirstName + " " + this.userMiddleName + " " + this.userLastName;
     }
@@ -43,11 +44,11 @@ public class UserModel{
 
     protected String userPhone;
 
-    public UserModel() {
+    public UserEntity() {
 
     }
 
-    public UserModel(Integer userId, String username, String password, UserRole userRole, Date userDateCreated, Date userDateUpdated, String userFirstName, String userLastName, Date userDateOfBirth, String userMiddleName, Boolean userGender, String userAddress, String userEmail, String userPhone) {
+    public UserEntity(Integer userId, String username, String password, UserRole userRole, Date userDateCreated, Date userDateUpdated, String userFirstName, String userLastName, Date userDateOfBirth, String userMiddleName, Boolean userGender, String userAddress, String userEmail, String userPhone) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -62,23 +63,6 @@ public class UserModel{
         this.userAddress = userAddress;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
-    }
-    
-    public UserModel(UserEntity userEntity) {
-                this.userId = userEntity.getUserId();
-                this.username = userEntity.getUserUsername();
-                this.password = userEntity.getUserPassword();
-                this.userRole = UserModel.UserRole.valueOf(userEntity.getUserRole());
-                this.userDateCreated = userEntity.getUserDateCreated();
-                this.userDateUpdated = userEntity.getUserDateUpdated() ;
-                this.userFirstName = userEntity.getUserFirstName() ;
-                this.userLastName = userEntity.getUserLastName();
-                this.userDateOfBirth = userEntity.getUserDateOfBirth();
-                this.userMiddleName = userEntity.getUserMiddleName();
-                this.userGender = userEntity.getUserGender();
-                this.userAddress = userEntity.getUserAddress();
-                this.userEmail = userEntity.getUserEmail();
-                this.userPhone = userEntity.getUserPhone();
     }
 
     public Integer getUserId() {

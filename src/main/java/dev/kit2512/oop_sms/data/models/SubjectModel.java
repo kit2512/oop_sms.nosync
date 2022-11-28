@@ -1,10 +1,11 @@
-package dev.kit2512.oop_sms.data.entities;
+package dev.kit2512.oop_sms.data.models;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import dev.kit2512.oop_sms.domain.entities.SubjectEntity;
 
-@DatabaseTable(tableName = SubjectEntity.TABLE_NAME)
-public class SubjectEntity {
+@DatabaseTable(tableName = SubjectModel.TABLE_NAME)
+public class SubjectModel {
     public static final String TABLE_NAME = "subjects";
 
     public static final String SOLUMN_SUBJECT_CREDITS = "subject_credit";
@@ -12,23 +13,37 @@ public class SubjectEntity {
     public static final String COLUMN_SUBJECT_NAME = "subject_name";
 
     public static final String COLUMN_SUBJECT_ID = "subject_id";
-    @DatabaseField(columnName = SubjectEntity.COLUMN_SUBJECT_ID, generatedId = true)
+    @DatabaseField(columnName = SubjectModel.COLUMN_SUBJECT_ID, generatedId = true)
     private Integer subjectId;
 
-    @DatabaseField(columnName = SubjectEntity.COLUMN_SUBJECT_NAME)
+    @DatabaseField(columnName = SubjectModel.COLUMN_SUBJECT_NAME)
     private String subjectName;
 
-    @DatabaseField(columnName = SubjectEntity.SOLUMN_SUBJECT_CREDITS)
+    @DatabaseField(columnName = SubjectModel.SOLUMN_SUBJECT_CREDITS)
     private Integer subjectCredits;
 
-    public SubjectEntity() {
+    public SubjectModel() {
 
     }
 
-    public SubjectEntity(Integer subjectId, String subjectName, Integer subjectCredits) {
+    public SubjectModel(Integer subjectId, String subjectName, Integer subjectCredits) {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.subjectCredits = subjectCredits;
+    }
+
+    public SubjectModel(SubjectEntity entity) {
+        this.subjectId = entity.getSubjectId();
+        this.subjectName = entity.getSubjectName();
+        this.subjectCredits = entity.getSubjectCredits();
+    }
+
+    public SubjectEntity mapToEntity() {
+        return new SubjectEntity(
+                this.subjectId,
+                this.subjectName,
+                this.subjectCredits
+        );
     }
 
     public Integer getSubjectId() {

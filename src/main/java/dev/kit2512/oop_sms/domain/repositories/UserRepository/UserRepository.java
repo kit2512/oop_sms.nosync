@@ -5,7 +5,7 @@
 package dev.kit2512.oop_sms.domain.repositories.UserRepository;
 
 
-import dev.kit2512.oop_sms.domain.models.UserModel;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,13 +15,13 @@ import java.util.List;
  * @author macpro13
  */
 public interface UserRepository {
-    List<UserModel> getUsers() throws UserException;
+    List<UserEntity> getUsers() throws UserException;
 
-    List<UserModel> getUsers(HashMap<String, Object> filter) throws UserException;
+    List<UserEntity> getUsers(HashMap<String, Object> filter) throws UserException;
 
-    UserModel removeUser(UserModel userEntity) throws UserException;
+    UserEntity removeUser(UserEntity userEntity) throws UserException;
     
-    UserModel addUser(UserModel userEntity) throws UserException;
+    UserEntity addUser(UserEntity userEntity) throws UserException;
     
-    UserModel updateUser(UserModel oldUserModel, UserModel newUserModel) throws UserException;
+    UserEntity updateUser(UserEntity oldUserEntity, UserEntity newUserEntity) throws UserException;
 }

@@ -5,7 +5,6 @@
 package dev.kit2512.oop_sms;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import dev.kit2512.oop_sms.config.AppConstants;
 import dev.kit2512.oop_sms.config.injectors.AppGraph;
@@ -22,18 +21,15 @@ import dev.kit2512.oop_sms.data.daos.SubjectDao.SubjectDaoImpl;
 import dev.kit2512.oop_sms.data.daos.UserDao.UserDao;
 import dev.kit2512.oop_sms.data.daos.UserDao.UserDaoImpl;
 import dev.kit2512.oop_sms.data.repositories.*;
-import dev.kit2512.oop_sms.domain.models.StudentModel;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 import dev.kit2512.oop_sms.domain.repositories.MajorRepository.MajorRepository;
 import dev.kit2512.oop_sms.domain.repositories.ResultRepository.ResultRepository;
-import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentException;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentRepository;
 import dev.kit2512.oop_sms.domain.repositories.SubjectRepository.SubjectRepository;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserRepository;
 
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;

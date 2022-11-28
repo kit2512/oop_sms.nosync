@@ -5,12 +5,12 @@
 package dev.kit2512.oop_sms.data.daos.UserDao;
 
 import com.j256.ormlite.dao.Dao;
-import dev.kit2512.oop_sms.data.entities.UserEntity;
+import dev.kit2512.oop_sms.data.models.UserModel;
 
 /**
  *
  * @author macpro13
  */
-public interface UserDao extends Dao<UserEntity, Integer> {
+public interface UserDao extends Dao<UserModel, Integer> {
     
 }

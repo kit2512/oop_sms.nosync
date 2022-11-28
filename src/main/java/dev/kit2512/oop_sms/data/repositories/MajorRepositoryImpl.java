@@ -1,7 +1,7 @@
 package dev.kit2512.oop_sms.data.repositories;
 
 import dev.kit2512.oop_sms.data.daos.MajorDao.MajorDao;
-import dev.kit2512.oop_sms.domain.models.MajorModel;
+import dev.kit2512.oop_sms.domain.entities.MajorEntity;
 import dev.kit2512.oop_sms.domain.repositories.MajorRepository.MajorException;
 import dev.kit2512.oop_sms.domain.repositories.MajorRepository.MajorRepository;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserException;
@@ -19,27 +19,27 @@ public class MajorRepositoryImpl implements MajorRepository {
     }
 
     @Override
-    public List<MajorModel> getUsers() throws UserException {
+    public List<MajorEntity> getUsers() throws UserException {
         return null;
     }
 
     @Override
-    public List<MajorModel> getUsers(HashMap<String, Object> filter) throws UserException {
+    public List<MajorEntity> getUsers(HashMap<String, Object> filter) throws UserException {
         return null;
     }
 
     @Override
-    public MajorModel removeUser(MajorModel userEntity) throws UserException {
+    public MajorEntity removeUser(MajorEntity userEntity) throws UserException {
         return null;
     }
 
     @Override
-    public MajorModel addUser(MajorModel userEntity) throws UserException {
+    public MajorEntity addUser(MajorEntity userEntity) throws UserException {
         return null;
     }
 
     @Override
-    public MajorModel updateUser(MajorModel oldMajorModel, MajorModel newMajorModel) throws MajorException {
+    public MajorEntity updateUser(MajorEntity oldMajorModel, MajorEntity newMajorModel) throws MajorException {
         return null;
     }
 }

@@ -4,11 +4,11 @@
  */
 package dev.kit2512.oop_sms.data.repositories;
 
-import dev.kit2512.oop_sms.domain.models.UserModel;
+import dev.kit2512.oop_sms.data.models.UserModel;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationException;
 import dev.kit2512.oop_sms.data.daos.UserDao.UserDao;
 import dev.kit2512.oop_sms.data.daos.UserDao.UserDaoImpl;
-import dev.kit2512.oop_sms.data.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 
 import java.sql.SQLException;
@@ -34,28 +34,28 @@ public class AuthenticationRepositoryImpl implements AuthenticationRepository {
         this.userDao = userDao;
     }
 
-    private UserModel currentUser;
+    private UserEntity currentUser;
 
     @Override
-    public UserModel getCurrentUser() {
+    public UserEntity getCurrentUser() {
         return currentUser;
     }
     
-    private void setCurrentUser(UserModel currentUser) {
+    private void setCurrentUser(UserEntity currentUser) {
         this.currentUser = currentUser;
     }
 
     @Override
-    public UserModel logIn(String username, String password) throws AuthenticationException {
+    public UserEntity logIn(String username, String password) throws AuthenticationException {
         try {
             Map<String, Object> query = new HashMap<>();
             query.put("user_username", username);
             query.put("user_password", password);
 
-            final UserEntity userEntity = userDao.queryForFieldValuesArgs(query).get(0);
+            final UserModel userModel = userDao.queryForFieldValuesArgs(query).get(0);
 
-            if (userEntity != null) {
-                setCurrentUser(new UserModel(userEntity));
+            if (userModel != null) {
+                setCurrentUser(userModel.mapToEntity());
                 return getCurrentUser();
             } else {
                 throw new AuthenticationException("Invalid username or password");
@@ -80,9 +80,9 @@ public class AuthenticationRepositoryImpl implements AuthenticationRepository {
     }
 
     @Override
-    public void updatePassword(UserModel userModel, String oldPassword, String newPassword) throws AuthenticationException{
+    public void updatePassword(UserEntity userModel, String oldPassword, String newPassword) throws AuthenticationException{
 
-        final UserEntity userEntity = new UserEntity(userModel);
+        final UserModel userEntity = new UserModel(userModel);
         if (userEntity.getUserPassword().equals(oldPassword)) {
             userEntity.setUserPassword(newPassword);
             try {

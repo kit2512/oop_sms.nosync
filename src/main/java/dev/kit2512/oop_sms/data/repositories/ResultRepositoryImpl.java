@@ -2,18 +2,13 @@ package dev.kit2512.oop_sms.data.repositories;
 
 import dev.kit2512.oop_sms.data.daos.ResultDao.ResultDao;
 import dev.kit2512.oop_sms.data.daos.ResultDao.ResultDaoImpl;
-import dev.kit2512.oop_sms.data.entities.UserEntity;
-import dev.kit2512.oop_sms.domain.models.ResultModel;
-import dev.kit2512.oop_sms.domain.models.UserModel;
-import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationException;
+import dev.kit2512.oop_sms.domain.entities.ResultEntity;
 import dev.kit2512.oop_sms.domain.repositories.ResultRepository.ResultException;
 import dev.kit2512.oop_sms.domain.repositories.ResultRepository.ResultRepository;
 
 import javax.inject.Inject;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ResultRepositoryImpl implements ResultRepository {
     private ResultDao resultDao;
@@ -29,27 +24,27 @@ public class ResultRepositoryImpl implements ResultRepository {
 
 
     @Override
-    public List<ResultModel> getUsers() throws ResultException {
+    public List<ResultEntity> getUsers() throws ResultException {
         return null;
     }
 
     @Override
-    public List<ResultModel> getUsers(HashMap<String, Object> filter) throws ResultException {
+    public List<ResultEntity> getUsers(HashMap<String, Object> filter) throws ResultException {
         return null;
     }
 
     @Override
-    public ResultModel removeUser(ResultModel userEntity) throws ResultException {
+    public ResultEntity removeUser(ResultEntity userEntity) throws ResultException {
         return null;
     }
 
     @Override
-    public ResultModel addUser(ResultModel userEntity) throws ResultException {
+    public ResultEntity addUser(ResultEntity userEntity) throws ResultException {
         return null;
     }
 
     @Override
-    public ResultModel updateUser(ResultModel oldResultModel, ResultModel newSubjectModel) throws ResultException {
+    public ResultEntity updateUser(ResultEntity oldResultEntity, ResultEntity newSubjectModel) throws ResultException {
         return null;
     }
 }

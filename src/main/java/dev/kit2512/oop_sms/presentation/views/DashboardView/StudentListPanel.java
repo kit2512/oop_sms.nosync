@@ -4,7 +4,7 @@
  */
 package dev.kit2512.oop_sms.presentation.views.DashboardView;
 
-import dev.kit2512.oop_sms.domain.models.StudentModel;
+import dev.kit2512.oop_sms.domain.entities.StudentEntity;
 import dev.kit2512.oop_sms.presentation.controllers.StudentListController;
 import dev.kit2512.oop_sms.presentation.models.DashboardModel;
 import dev.kit2512.oop_sms.presentation.views.AbstractView;
@@ -142,15 +142,15 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
             case DashboardModel.ERROR_MESSAGE_PROPERTY -> JOptionPane.showMessageDialog(this, (String) event.getNewValue(), "Error", 1);
             case DashboardModel.STUDENT_LIST_PROPERTY -> {
                 this.studentListTableModel.setRowCount(0);
-                final List<StudentModel> studentList = (List<StudentModel>) event.getNewValue();
+                final List<StudentEntity> studentList = (List<StudentEntity>) event.getNewValue();
                 mapStudentModelToTableRow(studentList);
                 this.studentListTable.setModel(this.studentListTableModel);
             }
         }
     }
     
-    private void mapStudentModelToTableRow(List<StudentModel> studentList) {
-        for (StudentModel student : studentList) {
+    private void mapStudentModelToTableRow(List<StudentEntity> studentList) {
+        for (StudentEntity student : studentList) {
             final List<Object> row = new ArrayList<>();
             row.add(student.getStudentFullId());
             row.add(student.getFullName());

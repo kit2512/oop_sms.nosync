@@ -1,13 +1,13 @@
-package dev.kit2512.oop_sms.data.entities;
+package dev.kit2512.oop_sms.data.models;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import dev.kit2512.oop_sms.domain.models.UserModel;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
 
 import java.util.Date;
 
-@DatabaseTable(tableName = UserEntity.TABLE_NAME)
-public class UserEntity{
+@DatabaseTable(tableName = UserModel.TABLE_NAME)
+public class UserModel {
 
     public static final String TABLE_NAME = "users";
 
@@ -39,53 +39,53 @@ public class UserEntity{
 
     public static final String COLUMN_DATE_OF_BIRTH = "user_date_of_birth";
 
-    @DatabaseField(columnName = UserEntity.COLUMN_USER_ID, generatedId = true)
+    @DatabaseField(columnName = UserModel.COLUMN_USER_ID, generatedId = true)
     private Integer userId;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_USER_USERNAME, canBeNull = false, unique = true)
+    @DatabaseField(columnName = UserModel.COLUMN_USER_USERNAME, canBeNull = false, unique = true)
     private String userUsername;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_USER_PASSWORD, canBeNull = false)
+    @DatabaseField(columnName = UserModel.COLUMN_USER_PASSWORD, canBeNull = false)
     private String userPassword;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_ROLE)
+    @DatabaseField(columnName = UserModel.COLUMN_ROLE)
     private String userRole;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_DATE_CREATED, canBeNull = false, format = "yyyy-MM-dd")
+    @DatabaseField(columnName = UserModel.COLUMN_DATE_CREATED, canBeNull = false, format = "yyyy-MM-dd")
     private Date userDateCreated;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_DATE_UPDATED, canBeNull = false, format = "yyyy-MM-dd")
+    @DatabaseField(columnName = UserModel.COLUMN_DATE_UPDATED, canBeNull = false, format = "yyyy-MM-dd")
     private Date userDateUpdated;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_FIRST_NAME, canBeNull = false)
+    @DatabaseField(columnName = UserModel.COLUMN_FIRST_NAME, canBeNull = false)
     private String userFirstName;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_LAST_NAME, canBeNull = false)
+    @DatabaseField(columnName = UserModel.COLUMN_LAST_NAME, canBeNull = false)
     private String userLastName;
     
-    @DatabaseField(columnName = UserEntity.COLUMN_DATE_OF_BIRTH, format = "yyyy-MM-dd")
+    @DatabaseField(columnName = UserModel.COLUMN_DATE_OF_BIRTH, format = "yyyy-MM-dd")
     private Date userDateOfBirth;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_MIDDLE_NAME)
+    @DatabaseField(columnName = UserModel.COLUMN_MIDDLE_NAME)
     private String userMiddleName;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_GENDER, canBeNull = false)
+    @DatabaseField(columnName = UserModel.COLUMN_GENDER, canBeNull = false)
     private Boolean userGender;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_ADDRESS)
+    @DatabaseField(columnName = UserModel.COLUMN_ADDRESS)
     private String userAddress;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_USER_EMAIL, canBeNull = false)
+    @DatabaseField(columnName = UserModel.COLUMN_USER_EMAIL, canBeNull = false)
     private String userEmail;
 
-    @DatabaseField(columnName = UserEntity.COLUMN_PHONE)
+    @DatabaseField(columnName = UserModel.COLUMN_PHONE)
     private String userPhone;
 
-    public UserEntity() {
+    public UserModel() {
 
     }
 
-    public UserEntity(Integer userId, String userUsername, String userPassword, String userRole, Date userDateCreated, Date userDateUpdated, String userFirstName, String userLastName, Date userDateOfBirth, String userMiddleName, Boolean userGender, String userAddress, String userEmail, String userPhone) {
+    public UserModel(Integer userId, String userUsername, String userPassword, String userRole, Date userDateCreated, Date userDateUpdated, String userFirstName, String userLastName, Date userDateOfBirth, String userMiddleName, Boolean userGender, String userAddress, String userEmail, String userPhone) {
         this.userId = userId;
         this.userUsername = userUsername;
         this.userPassword = userPassword;
@@ -215,20 +215,40 @@ public class UserEntity{
     }
 
 
-    public UserEntity(UserModel model) {
-                this.userId = model.getUserId();
-                this.userUsername = model.getUsername();
-                this.userPassword = model.getPassword();
-                this.userRole = model.getUserRole().name();
-                this.userDateCreated =model.getUserDateCreated();
-                this.userDateUpdated = model.getUserDateUpdated();
-                this.userFirstName = model.getUserFirstName();
-                this.userLastName = model.getUserLastName();
-                this.userDateOfBirth = model.getUserDateOfBirth();
-                this.userMiddleName = model.getUserMiddleName();
-                this.userGender = model.getUserGender();
-                this.userAddress = model.getUserAddress();
-                this.userEmail = model.getUserEmail();
-                this.userPhone = model.getUserPhone();
+    public UserModel(dev.kit2512.oop_sms.domain.entities.UserEntity entity) {
+                this.userId = entity.getUserId();
+                this.userUsername = entity.getUsername();
+                this.userPassword = entity.getPassword();
+                this.userRole = entity.getUserRole().name();
+                this.userDateCreated =entity.getUserDateCreated();
+                this.userDateUpdated = entity.getUserDateUpdated();
+                this.userFirstName = entity.getUserFirstName();
+                this.userLastName = entity.getUserLastName();
+                this.userDateOfBirth = entity.getUserDateOfBirth();
+                this.userMiddleName = entity.getUserMiddleName();
+                this.userGender = entity.getUserGender();
+                this.userAddress = entity.getUserAddress();
+                this.userEmail = entity.getUserEmail();
+                this.userPhone = entity.getUserPhone();
+    }
+
+    public UserEntity mapToEntity() {
+        UserEntity entity = new UserEntity();
+        entity.setUserId(this.userId);
+        entity.setUsername(this.userUsername);
+        entity.setPassword(this.userPassword);
+        entity.setUserGender(this.userGender);
+        entity.setUserRole(UserEntity.UserRole.valueOf(this.userRole));
+        entity.setUserDateCreated(this.userDateCreated);
+        entity.setUserDateUpdated(this.userDateUpdated);
+        entity.setUserFirstName(this.userFirstName);
+        entity.setUserLastName(this.userLastName);
+        entity.setUserDateOfBirth(this.userDateOfBirth);
+        entity.setUserMiddleName(this.userMiddleName);
+        entity.setUserGender(this.userGender);
+        entity.setUserAddress(this.userAddress);
+        entity.setUserEmail(this.userEmail);
+        entity.setUserPhone(this.userPhone);
+        return entity;
     }
 }

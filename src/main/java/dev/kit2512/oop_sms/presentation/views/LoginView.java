@@ -5,7 +5,7 @@
 package dev.kit2512.oop_sms.presentation.views;
 
 import dev.kit2512.oop_sms.App;
-import dev.kit2512.oop_sms.domain.models.UserModel;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.presentation.controllers.DashboardController;
 import dev.kit2512.oop_sms.presentation.controllers.LoginController;
 import dev.kit2512.oop_sms.presentation.models.LoginModel;
@@ -210,7 +210,7 @@ public class LoginView extends javax.swing.JFrame implements AbstractView {
             }
 
             case LoginModel.USER_PROPERTY ->  {
-                final UserModel user = (UserModel) event.getNewValue();
+                final UserEntity user = (UserEntity) event.getNewValue();
                 this.setVisible(false);
                 this.dispose();
                 switch (user.getUserRole()) {

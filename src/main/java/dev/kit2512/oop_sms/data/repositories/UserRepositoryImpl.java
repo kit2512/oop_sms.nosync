@@ -1,7 +1,7 @@
 package dev.kit2512.oop_sms.data.repositories;
 
 import dev.kit2512.oop_sms.data.daos.UserDao.UserDao;
-import dev.kit2512.oop_sms.domain.models.UserModel;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserException;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserRepository;
 
@@ -18,27 +18,27 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<UserModel> getUsers() throws UserException {
+    public List<UserEntity> getUsers() throws UserException {
         return null;
     }
 
     @Override
-    public List<UserModel> getUsers(HashMap<String, Object> filter) throws UserException {
+    public List<UserEntity> getUsers(HashMap<String, Object> filter) throws UserException {
         return null;
     }
 
     @Override
-    public UserModel removeUser(UserModel userEntity) throws UserException {
+    public UserEntity removeUser(UserEntity userEntity) throws UserException {
         return null;
     }
 
     @Override
-    public UserModel addUser(UserModel userEntity) throws UserException {
+    public UserEntity addUser(UserEntity userEntity) throws UserException {
         return null;
     }
 
     @Override
-    public UserModel updateUser(UserModel oldUserModel, UserModel newUserModel) throws UserException {
+    public UserEntity updateUser(UserEntity oldUserEntity, UserEntity newUserEntity) throws UserException {
         return null;
     }
 }
