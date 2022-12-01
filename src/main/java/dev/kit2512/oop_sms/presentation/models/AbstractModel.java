@@ -5,13 +5,12 @@
 package dev.kit2512.oop_sms.presentation.models;
 
 import java.beans.*;
-import java.io.Serializable;
 
 /**
  *
  * @author macpro13
  */
-public class AbstractModel implements Serializable {
+public class AbstractModel {
     
     private final PropertyChangeSupport propertySupport;
     

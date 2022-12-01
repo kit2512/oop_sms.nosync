@@ -4,6 +4,8 @@
  */
 package dev.kit2512.oop_sms.presentation.views.InfoView;
 
+import java.awt.Component;
+
 /**
  *
  * @author h
@@ -15,6 +17,9 @@ public class StudentResultPanel extends javax.swing.JPanel {
      */
     public StudentResultPanel() {
         initComponents();
+        this.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.jScrollPane1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.jTable1.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
     /**
@@ -28,9 +33,20 @@ public class StudentResultPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        editScoreBtn = new javax.swing.JButton();
+        removeResultBtn = new javax.swing.JButton();
+        updateResultBtn = new javax.swing.JButton();
+        updateResultBtn1 = new javax.swing.JButton();
+
+        setMaximumSize(new java.awt.Dimension(346, 205));
+        setMinimumSize(new java.awt.Dimension(200, 48));
+        setPreferredSize(new java.awt.Dimension(346, 200));
+        setLayout(new java.awt.BorderLayout());
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setMinimumSize(null);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(400, 300));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,21 +77,35 @@ public class StudentResultPanel extends javax.swing.JPanel {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-        );
+        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEADING);
+        flowLayout1.setAlignOnBaseline(true);
+        jPanel1.setLayout(flowLayout1);
+
+        editScoreBtn.setText("Add result");
+        jPanel1.add(editScoreBtn);
+
+        removeResultBtn.setText("Remove result");
+        jPanel1.add(removeResultBtn);
+
+        updateResultBtn.setText("Update result");
+        jPanel1.add(updateResultBtn);
+
+        updateResultBtn1.setText("Calculate GPA");
+        jPanel1.add(updateResultBtn1);
+
+        add(jPanel1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editScoreBtn;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton removeResultBtn;
+    private javax.swing.JButton updateResultBtn;
+    private javax.swing.JButton updateResultBtn1;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,7 +1,7 @@
 package dev.kit2512.oop_sms.presentation.models;
 
-import dev.kit2512.oop_sms.config.exceptions.LoginException;
 import dev.kit2512.oop_sms.domain.entities.UserEntity;
+import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationException;
 import dev.kit2512.oop_sms.domain.usecases.LoginUseCase;
 
 import javax.inject.Inject;
@@ -66,7 +66,7 @@ public class LoginModel extends AbstractModel {
         super.firePropertyChange(IS_LOADING_PROPERTY, !isLoading, isLoading);
         try {
             if (username.isEmpty()) {
-                throw new LoginException("Username must not be empty");
+                throw new AuthenticationException("Username must not be empty");
             }
 
 //            if (!username.matches(AppConstants.StringPattern.usernamePattern)) {
@@ -74,22 +74,22 @@ public class LoginModel extends AbstractModel {
 //            }
 
             if (username.length() <= 8 || username.length() >= 16) {
-                throw new LoginException("Username must be between 8 and 16 characters");
+                throw new AuthenticationException("Username must be between 8 and 16 characters");
             }
 
             if (password.isEmpty()) {
-                throw new LoginException("Password must not be empty");
+                throw new AuthenticationException("Password must not be empty");
             }
 
             if (password.length() <= 8 ) {
-                throw new LoginException("Password must be at least 8 characters");
+                throw new AuthenticationException("Password must be at least 8 characters");
             }
 
-            final UserEntity userEntity = loginUseCase.excecute(this.username, this.password);
+            final UserEntity userEntity = loginUseCase.execute(this.username, this.password);
             setErrorMessage(null);
             setSuccess(true);
             setUser(userEntity);
-        } catch (LoginException ex) {
+        } catch (AuthenticationException ex) {
             setSuccess(false);
             setErrorMessage(ex.getMessage());
             ex.printStackTrace();

@@ -71,17 +71,17 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public StudentEntity removeUser(StudentEntity userEntity) throws StudentException {
+    public StudentEntity removeStudent(StudentEntity userEntity) throws StudentException {
         return null;
     }
 
     @Override
-    public StudentEntity addUser(StudentEntity userEntity) throws StudentException {
+    public StudentEntity addStudent(StudentEntity userEntity) throws StudentException {
         return null;
     }
 
     @Override
-    public StudentEntity updateUser(StudentEntity oldStudentModel, StudentEntity newStudentModel) throws StudentException {
+    public StudentEntity updateStudent(StudentEntity oldStudentModel, StudentEntity newStudentModel) throws StudentException {
         return null;
     }
    

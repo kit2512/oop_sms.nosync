@@ -18,9 +18,9 @@ public interface StudentRepository {
 
     List<StudentEntity> getStudents(HashMap<String, Object> filter) throws StudentException;
 
-    StudentEntity removeUser(StudentEntity userEntity) throws StudentException;
+    StudentEntity removeStudent(StudentEntity userEntity) throws StudentException;
 
-    StudentEntity addUser(StudentEntity userEntity) throws StudentException;
+    StudentEntity addStudent(StudentEntity userEntity) throws StudentException;
 
-    StudentEntity updateUser(StudentEntity oldStudentModel, StudentEntity newStudentModel) throws StudentException;
+    StudentEntity updateStudent(StudentEntity oldStudentModel, StudentEntity newStudentModel) throws StudentException;
 }

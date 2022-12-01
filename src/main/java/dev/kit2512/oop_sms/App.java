@@ -14,6 +14,8 @@ import dev.kit2512.oop_sms.config.injectors.RepositoryModule;
 import dev.kit2512.oop_sms.data.daos.MajorDao.MajorDaoImpl;
 import dev.kit2512.oop_sms.data.daos.ResultDao.ResultDao;
 import dev.kit2512.oop_sms.data.daos.ResultDao.ResultDaoImpl;
+import dev.kit2512.oop_sms.data.daos.StaffDao.StaffDao;
+import dev.kit2512.oop_sms.data.daos.StaffDao.StaffDaoImpl;
 import dev.kit2512.oop_sms.data.daos.StudentDao.StudentDao;
 import dev.kit2512.oop_sms.data.daos.StudentDao.StudentDaoImpl;
 import dev.kit2512.oop_sms.data.daos.SubjectDao.SubjectDao;
@@ -24,6 +26,7 @@ import dev.kit2512.oop_sms.data.repositories.*;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 import dev.kit2512.oop_sms.domain.repositories.MajorRepository.MajorRepository;
 import dev.kit2512.oop_sms.domain.repositories.ResultRepository.ResultRepository;
+import dev.kit2512.oop_sms.domain.repositories.StaffRepository.StaffRepository;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentRepository;
 import dev.kit2512.oop_sms.domain.repositories.SubjectRepository.SubjectRepository;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserRepository;
@@ -50,6 +53,8 @@ public class App {
     
     private SubjectDao subjectDao;
 
+    private StaffDao staffDao;
+
     private AuthenticationRepository authenticationRepository;
 
     private UserRepository userRepository;
@@ -62,9 +67,13 @@ public class App {
 
     private StudentRepository studentRepository;
 
+    private StaffRepository staffRepository;
+
     private DaoModule daoModule;
 
     private RepositoryModule repositoryModule;
+
+
 
     public static AppGraph appGraph;
     
@@ -99,6 +108,7 @@ public class App {
             majorDao = new MajorDaoImpl(connectionSource);
             subjectDao = new SubjectDaoImpl(connectionSource);
             resultDao = new ResultDaoImpl(connectionSource);
+            staffDao = new StaffDaoImpl(connectionSource);
 
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,10 +119,16 @@ public class App {
     private void setUpRepository() {
         authenticationRepository = new AuthenticationRepositoryImpl(userDao);
         userRepository = new UserRepositoryImpl(userDao);
-        studentRepository = new StudentRepositoryImpl(studentDao, userDao, resultDao, majorDao, subjectDao);
+        studentRepository = new StudentRepositoryImpl(studentDao,
+                userDao,
+                resultDao,
+                majorDao,
+                subjectDao
+        );
         majorRepository = new MajorRepositoryImpl(majorDao);
         resultRepository = new ResultRepositoryImpl(resultDao);
         subjectRepository = new SubjectRepositoryImpl(subjectDao);
+        staffRepository = new StaffRepositoryImpl(staffDao);
     }
 
     private void setUpDagger() {
@@ -121,7 +137,8 @@ public class App {
                 resultDao,
                 studentDao,
                 subjectDao,
-                majorDao
+                majorDao,
+                staffDao
         );
 
         repositoryModule = new RepositoryModule(
@@ -130,7 +147,8 @@ public class App {
                 subjectRepository,
                 studentRepository,
                 userRepository,
-                majorRepository
+                majorRepository,
+                staffRepository
         );
 
         appGraph = DaggerAppGraph.builder()

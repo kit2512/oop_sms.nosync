@@ -6,7 +6,6 @@ package dev.kit2512.oop_sms.domain.usecases;
 
 import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationException;
-import dev.kit2512.oop_sms.config.exceptions.LoginException;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 import javax.inject.Inject;
 
@@ -23,17 +22,11 @@ public class LoginUseCase{
         this.authenticationRepository = authenticationRepository;
     }
     
-    public UserEntity excecute(String username, String password) throws LoginException {
-        try {
+    public UserEntity execute(String username, String password) throws AuthenticationException {
             final UserEntity userEntity = authenticationRepository.logIn(username, password);
             if (userEntity == null) {
-                throw new LoginException("Username or password is incorrect");
+                throw new AuthenticationException("Username or password is incorrect");
             }
             return userEntity;
-        } catch (AuthenticationException ex) {
-            throw new LoginException(ex.getMessage());
-        } catch (IndexOutOfBoundsException ex) {
-            throw new LoginException("UserModel not found");
-        }
     }
 }

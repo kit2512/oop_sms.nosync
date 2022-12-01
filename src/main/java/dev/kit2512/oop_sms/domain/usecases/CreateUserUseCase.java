@@ -6,7 +6,7 @@ import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserException;
 
 import javax.inject.Inject;
 
-public class CreateUserUseCase implements BaseUseCase<UserEntity> {
+public class CreateUserUseCase {
     protected final AuthenticationRepository authenticationRepository;
 
     @Inject
@@ -14,7 +14,6 @@ public class CreateUserUseCase implements BaseUseCase<UserEntity> {
         this.authenticationRepository = authenticationRepository;
     }
 
-    @Override
     public UserEntity execute() throws UserException {
         throw new UserException("Not implemented");
     }

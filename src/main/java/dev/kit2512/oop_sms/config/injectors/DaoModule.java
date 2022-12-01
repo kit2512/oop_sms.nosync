@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import dev.kit2512.oop_sms.data.daos.MajorDao.MajorDao;
 import dev.kit2512.oop_sms.data.daos.ResultDao.ResultDao;
+import dev.kit2512.oop_sms.data.daos.StaffDao.StaffDao;
 import dev.kit2512.oop_sms.data.daos.StudentDao.StudentDao;
 import dev.kit2512.oop_sms.data.daos.SubjectDao.SubjectDao;
 import dev.kit2512.oop_sms.data.daos.UserDao.UserDao;
@@ -18,12 +19,15 @@ public class DaoModule {
     private SubjectDao subjectDao;
     private MajorDao majorDao;
 
-    public DaoModule(UserDao userDao, ResultDao resultDao, StudentDao studentDao, SubjectDao subjectDao, MajorDao majorDao) {
+    private StaffDao staffDao;
+
+    public DaoModule(UserDao userDao, ResultDao resultDao, StudentDao studentDao, SubjectDao subjectDao, MajorDao majorDao, StaffDao staffDao) {
         this.userDao = userDao;
         this.resultDao = resultDao;
         this.studentDao = studentDao;
         this.subjectDao = subjectDao;
         this.majorDao = majorDao;
+        this.staffDao = staffDao;
     }
 
     @Provides
@@ -54,5 +58,11 @@ public class DaoModule {
     @Singleton
     public MajorDao getMajorDao() {
         return majorDao;
+    }
+
+    @Provides
+    @Singleton
+    public StaffDao getStaffDao() {
+        return staffDao;
     }
 }

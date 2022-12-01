@@ -15,7 +15,7 @@ import javax.inject.Inject;
  *
  * @author macpro13
  */
-public class GetStudentListUseCase implements BaseUseCase<ArrayList<StudentEntity>> {
+public class GetStudentListUseCase {
     final private StudentRepository studentRepositroy;
 
     @Inject

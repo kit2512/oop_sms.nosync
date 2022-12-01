@@ -6,8 +6,12 @@ package dev.kit2512.oop_sms.config.injectors;
 
 import dagger.Component;
 import dev.kit2512.oop_sms.data.repositories.AuthenticationRepositoryImpl;
+import dev.kit2512.oop_sms.data.repositories.StaffRepositoryImpl;
 import dev.kit2512.oop_sms.data.repositories.StudentRepositoryImpl;
 import dev.kit2512.oop_sms.data.repositories.UserRepositoryImpl;
+import dev.kit2512.oop_sms.domain.repositories.StaffRepository.StaffRepository;
+import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentRepository;
+import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserRepository;
 import dev.kit2512.oop_sms.domain.usecases.CreateUserUseCase;
 import dev.kit2512.oop_sms.domain.usecases.GetStudentListUseCase;
 import dev.kit2512.oop_sms.domain.usecases.LoginUseCase;
@@ -37,9 +41,12 @@ public interface AppGraph {
 
     AuthenticationRepositoryImpl getAuthenticationRepository();
 
-    StudentRepositoryImpl getStudentRepository();
 
-    UserRepositoryImpl getUserRepository();
+    StudentRepository getStudentRepository();
+
+    UserRepository getUserRepository();
+
+    StaffRepository getStaffRepository();
     
     // use cases
     LoginUseCase getLoginUseCase();

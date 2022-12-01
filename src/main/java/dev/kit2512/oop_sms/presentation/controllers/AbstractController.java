@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author macpro13
+ * @author Nguyen Huu Hung
  */
 public abstract class AbstractController implements PropertyChangeListener {
 
@@ -62,7 +62,6 @@ public abstract class AbstractController implements PropertyChangeListener {
                 method.invoke(model, newValue);
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException ex) {
                 Logger.getLogger(AbstractController.class.getName()).log(Level.SEVERE, null, ex);
-
             }
         }
     }
