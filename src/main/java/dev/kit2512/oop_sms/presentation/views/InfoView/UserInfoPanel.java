@@ -4,24 +4,42 @@
  */
 package dev.kit2512.oop_sms.presentation.views.InfoView;
 
+import dev.kit2512.oop_sms.App;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
+import dev.kit2512.oop_sms.presentation.views.UpdatePasswordView;
 import java.awt.Component;
+import javax.swing.*;
 
 /**
  *
  * @author h
  */
 public class UserInfoPanel extends javax.swing.JPanel {
+    final UserEntity userEntity;
 
     /**
      * Creates new form UserInformationView
+     * @param userEntity
      */
-    public UserInfoPanel() {
+    public UserInfoPanel(UserEntity userEntity) {
+        this.userEntity = userEntity;
         initComponents();
-        setVisible(true);
+        this.usernameLabel.setText(userEntity.getUsername());
+        this.fullNameLabel.setText(userEntity.getFullName());
+        this.addressLabel.setText(userEntity.getUserAddress());
+        this.dateOfBirthLabel.setText(userEntity.getUserDateOfBirthString());
+        this.emailLabel.setText(userEntity.getUserEmail());
+        this.roleLabel.setText(userEntity.getUserRole().toString());
+        this.phoneNumberLabel.setText(userEntity.getUserPhone());
+        this.genderLabel.setText(userEntity.getUserGender() ? "Female" : "Male");
+        final UserEntity.UserRole userRole = App.appGraph.getAuthenticationRepository().getCurrentUser().getUserRole();
+        if (userRole == UserEntity.UserRole.STUDENT) {
+           this.resetPasswordBtn.setVisible(false);
+        }
+        
         this.setAlignmentX(Component.RIGHT_ALIGNMENT);
-
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,10 +49,6 @@ public class UserInfoPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         roleLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
@@ -52,26 +66,13 @@ public class UserInfoPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         phoneNumberLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        deleteUserBtn = new javax.swing.JButton();
+        resetPasswordBtn = new javax.swing.JButton();
+        updaetInfoBtn = new javax.swing.JButton();
+        updatePasswordBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(610, 205));
-
-        jButton1.setText("Change password");
-
-        jButton2.setText("Reset password");
-
-        jButton3.setText("Update information");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Delete user");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
 
         roleLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         roleLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -200,6 +201,41 @@ public class UserInfoPanel extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+
+        deleteUserBtn.setText("Delete user");
+        deleteUserBtn.setMaximumSize(new java.awt.Dimension(141, 23));
+        deleteUserBtn.setMinimumSize(new java.awt.Dimension(141, 23));
+        deleteUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserBtnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(deleteUserBtn);
+
+        resetPasswordBtn.setText("Reset password");
+        resetPasswordBtn.setMaximumSize(new java.awt.Dimension(141, 23));
+        resetPasswordBtn.setMinimumSize(new java.awt.Dimension(141, 23));
+        jPanel2.add(resetPasswordBtn);
+
+        updaetInfoBtn.setText("Update information");
+        updaetInfoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updaetInfoBtnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(updaetInfoBtn);
+
+        updatePasswordBtn.setText("Update password");
+        updatePasswordBtn.setMaximumSize(new java.awt.Dimension(141, 23));
+        updatePasswordBtn.setMinimumSize(new java.awt.Dimension(141, 23));
+        updatePasswordBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatePasswordBtnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(updatePasswordBtn);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,50 +243,49 @@ public class UserInfoPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void updaetInfoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updaetInfoBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_updaetInfoBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void deleteUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserBtnActionPerformed
+        final Integer selected = JOptionPane.showConfirmDialog(this, "Do you want to deleted this user?\nAll data will be lost");
+        if (selected == JOptionPane.YES_OPTION) {
+            App.appGraph.getStudentListModel().setRemovingStudentId(userEntity.getUserId());
+            App.appGraph.getInfoController().elementClosingChanged(true);
+            App.appGraph.getStudentListController().elementFetchingStudentListChanged(true);
+        }
+    }//GEN-LAST:event_deleteUserBtnActionPerformed
+
+    private void updatePasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePasswordBtnActionPerformed
+        final UpdatePasswordView updatePasswordView = App.appGraph.getUpdatePasswordView();
+        updatePasswordView.getData(userEntity.getUserId());
+        updatePasswordView.setModal(true);
+        updatePasswordView.setVisible(true);
+    }//GEN-LAST:event_updatePasswordBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressLabel;
     private javax.swing.JLabel dateOfBirthLabel;
+    private javax.swing.JButton deleteUserBtn;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel fullNameLabel;
     private javax.swing.JLabel genderLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
@@ -260,13 +295,13 @@ public class UserInfoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel phoneNumberLabel;
+    private javax.swing.JButton resetPasswordBtn;
     private javax.swing.JLabel roleLabel;
+    private javax.swing.JButton updaetInfoBtn;
+    private javax.swing.JButton updatePasswordBtn;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 
-    public static void main(String[] args) {
-        final UserInfoPanel view = new UserInfoPanel();
-        view.setVisible(true);
-    }
 }

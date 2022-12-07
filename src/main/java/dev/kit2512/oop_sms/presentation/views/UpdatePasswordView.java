@@ -4,17 +4,41 @@
  */
 package dev.kit2512.oop_sms.presentation.views;
 
+import dev.kit2512.oop_sms.presentation.controllers.UpdatePasswordController;
+import dev.kit2512.oop_sms.presentation.models.UpdatePasswordModel;
+import java.beans.PropertyChangeEvent;
+import javax.inject.Inject;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 /**
  *
  * @author macpro13
  */
-public class UpdatePasswordView extends javax.swing.JFrame {
+public class UpdatePasswordView extends javax.swing.JDialog implements AbstractView {
+    
+    private final UpdatePasswordController controller;
 
     /**
      * Creates new form UpdatePasswordView
      */
-    public UpdatePasswordView() {
+    @Inject
+    public UpdatePasswordView(UpdatePasswordController controller) {
+        this.controller = controller;
         initComponents();
+        initListeners();
+        this.current.setText(null);
+        this.newPassword.setText(null);
+        this.confirmPassword.setText(null);
+        addView();
+        this.pack();
+        this.setResizable(false);
+        
+    }
+    
+    public void getData(Integer userId) {
+        controller.setFetchingData(userId);
     }
 
     /**
@@ -26,57 +50,208 @@ public class UpdatePasswordView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        current = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        newPassword = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        confirmPassword = new javax.swing.JPasswordField();
+        updateBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Update password");
+
+        jLabel1.setText("Current password");
+
+        current.setText("oldPassword");
+
+        jLabel2.setText("New password");
+
+        newPassword.setText("oldPassword");
+
+        jLabel3.setText("Confirm new password");
+
+        confirmPassword.setText("oldPassword");
+
+        updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+
+        cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(current, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(newPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(confirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(updateBtn)
+                        .addGap(37, 37, 37)
+                        .addComponent(cancelBtn)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(current, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(newPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(confirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updateBtn)
+                    .addComponent(cancelBtn))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        controller.elementUpdateButtonClicked(true);
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelBtnActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelBtn;
+    private javax.swing.JPasswordField confirmPassword;
+    private javax.swing.JPasswordField current;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPasswordField newPassword;
+    private javax.swing.JButton updateBtn;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void modelPropertyChange(PropertyChangeEvent event) {
+        final Object value = event.getNewValue();
+
+        switch (event.getPropertyName()) {
+            case UpdatePasswordModel.ERROR_MESSASGE_PROPERTY -> {
+                if ((String) value != null) {
+                    JOptionPane.showMessageDialog(this, (String) value);
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdatePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpdatePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpdatePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpdatePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
+            case UpdatePasswordModel.SUCCESS -> {
+                if ((Boolean)value) {
+                    JOptionPane.showMessageDialog(this, "Successfully updated password.");
+                    this.dispose();
+                }
+            }
         }
-        //</editor-fold>
+    }
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UpdatePasswordView().setVisible(true);
+    private void initListeners() {
+        this.current.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                this.listen(String.valueOf(current.getPassword()));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                this.listen(String.valueOf(current.getPassword()));
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                this.listen(String.valueOf(current.getPassword()));
+
+            }
+
+            private void listen(String newValue) {
+                controller.elementCurrentPasswordChanged(newValue);
+            }
+        });
+        
+        this.newPassword.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                this.listen(String.valueOf(newPassword.getPassword()));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                this.listen(String.valueOf(newPassword.getPassword()));
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                this.listen(String.valueOf(newPassword.getPassword()));
+
+            }
+
+            private void listen(String newValue) {
+                controller.elementNewPasswordChanged(newValue);
+            }
+        });
+        
+        this.confirmPassword.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                this.listen(String.valueOf(confirmPassword.getPassword()));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                this.listen(String.valueOf(confirmPassword.getPassword()));
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                this.listen(String.valueOf(confirmPassword.getPassword()));
+
+            }
+
+            private void listen(String newValue) {
+                controller.elementConfirmPasswordChanged(newValue);
             }
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
+    private void addView() {
+        controller.addView(this);
+    }
 }

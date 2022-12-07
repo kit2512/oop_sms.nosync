@@ -5,6 +5,7 @@ import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.Authent
 import dev.kit2512.oop_sms.domain.usecases.LoginUseCase;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,6 +15,7 @@ import javax.inject.Inject;
  *
  * @author macpro13
  */
+@Singleton
 public class LoginModel extends AbstractModel {
 
     public static final String USERNAME_PROPERTY = "Username";

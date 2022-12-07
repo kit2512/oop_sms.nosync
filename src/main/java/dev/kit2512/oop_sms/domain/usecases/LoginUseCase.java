@@ -8,11 +8,13 @@ import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationException;
 import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.AuthenticationRepository;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  *
  * @author macpro13
  */
+@Singleton
 public class LoginUseCase{
     @Inject
     public  AuthenticationRepository authenticationRepository;

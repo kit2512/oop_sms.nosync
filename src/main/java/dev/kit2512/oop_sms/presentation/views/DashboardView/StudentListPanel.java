@@ -4,11 +4,13 @@
  */
 package dev.kit2512.oop_sms.presentation.views.DashboardView;
 
+import dev.kit2512.oop_sms.App;
 import dev.kit2512.oop_sms.domain.entities.StudentEntity;
+import dev.kit2512.oop_sms.presentation.controllers.AddStudentController;
 import dev.kit2512.oop_sms.presentation.controllers.StudentListController;
 import dev.kit2512.oop_sms.presentation.models.DashboardModel;
+import dev.kit2512.oop_sms.presentation.models.StudentListModel;
 import dev.kit2512.oop_sms.presentation.views.AbstractView;
-import dev.kit2512.oop_sms.presentation.views.InfoView.InforView;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +77,11 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         addStudenBtn.setText("Add student");
+        addStudenBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addStudenBtnActionPerformed(evt);
+            }
+        });
         jPanel1.add(addStudenBtn);
 
         importExcelStudentBtn.setText("Import from Excel");
@@ -84,6 +91,11 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
         jPanel1.add(editStudentInfoBtn);
 
         removeStudentBtn.setText("Remove");
+        removeStudentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeStudentBtnActionPerformed(evt);
+            }
+        });
         jPanel1.add(removeStudentBtn);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_END);
@@ -91,11 +103,30 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
 
     private void onTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onTableMouseClicked
         if (evt.getClickCount() == 2) {
-            final InforView inforView = new InforView();
-            inforView.setVisible(true);    
+            final int row = this.studentListTable.getSelectedRow();
+            final int userId = (int)this.studentListTable.getValueAt(row, 0);
+            App.appGraph.getInfoView().getUserInfo(userId);
         }
         
     }//GEN-LAST:event_onTableMouseClicked
+
+    private void removeStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStudentBtnActionPerformed
+        final Integer selectedRow = studentListTable.getSelectedRow();
+        if (selectedRow >= 0) {
+            final Integer userId = (Integer)studentListTable.getValueAt(selectedRow, 0);
+            controller.elementRemoveStudentClicked(userId);
+        }
+        controller.elementFetchingStudentListChanged(true);
+        
+        
+    }//GEN-LAST:event_removeStudentBtnActionPerformed
+
+    private void addStudenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudenBtnActionPerformed
+        AddStudentController addStudentController = App.appGraph.getAddStudentController();
+        StudentListModel studentListModel = App.appGraph.getStudentListModel();
+        addStudentController.addModel(studentListModel);
+        App.appGraph.getAddStudentView().setVisible(true);
+    }//GEN-LAST:event_addStudenBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -114,14 +145,14 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
 
             },
             new String [] {
-                "ID", "Name", "Major", "Gender", "Class", "Address", "Email", "Phone Number", "GPA"
+                "User ID", "ID", "Name", "Major", "Gender", "Class", "Address", "Email", "Phone Number", "GPA"
             } 
         ){
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+                java.lang.Integer.class ,java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false, true, false, true
+                false, false, false, false, true, false, false, true, false, true
             };
 
             @Override
@@ -152,6 +183,7 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
     private void mapStudentModelToTableRow(List<StudentEntity> studentList) {
         for (StudentEntity student : studentList) {
             final List<Object> row = new ArrayList<>();
+            row.add(student.getUserId());
             row.add(student.getStudentFullId());
             row.add(student.getFullName());
             row.add(student.getMajor().getName());

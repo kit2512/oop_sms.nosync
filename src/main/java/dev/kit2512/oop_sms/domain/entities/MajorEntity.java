@@ -47,4 +47,11 @@ public class MajorEntity extends BaseEntity {
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return this.getCode() + " - " + this.getName();
+    }
+    
+    
 }

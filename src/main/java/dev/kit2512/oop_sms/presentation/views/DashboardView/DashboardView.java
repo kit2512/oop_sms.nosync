@@ -5,6 +5,8 @@
 package dev.kit2512.oop_sms.presentation.views.DashboardView;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import dev.kit2512.oop_sms.App;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.presentation.controllers.DashboardController;
 import dev.kit2512.oop_sms.presentation.views.AbstractView;
 import java.beans.PropertyChangeEvent;
@@ -42,8 +44,10 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
     private void addView() {
         controller.addView(this);
         this.tabPane.addTab("Students", studentListPanel);
-        
-        this.tabPane.addTab("Staffs", staffListPanel);
+        final UserEntity currentUser = App.appGraph.getAuthenticationRepository().getCurrentUser();
+        if (currentUser != null && currentUser.getUserRole().equals(UserEntity.UserRole.ADMIN)) {
+            this.tabPane.addTab("Staff", staffListPanel);
+        }
     }
 
 
@@ -59,6 +63,9 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
         tabPane = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,6 +77,24 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
         });
 
         fileMenu.setText("File");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setText("Reload");
+        fileMenu.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setText("Log out");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem2);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem3.setText("Exit");
+        fileMenu.add(jMenuItem3);
+
         jMenuBar1.add(fileMenu);
 
         editMenu.setText("Edit");
@@ -100,6 +125,10 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -122,6 +151,9 @@ public class DashboardView extends javax.swing.JFrame implements AbstractView {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JTabbedPane tabPane;
     // End of variables declaration//GEN-END:variables
 

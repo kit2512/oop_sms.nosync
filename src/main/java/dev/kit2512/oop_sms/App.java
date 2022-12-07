@@ -85,6 +85,7 @@ public class App {
     public App() {
         try {
             /* Set the Nimbus look and feel */
+            System.setProperty("log4j.configurationFile","./src/res/log4j2.xml");
             UIManager.setLookAndFeel(new FlatDarkLaf());
             setUpDaos();
             setUpRepository();

@@ -1,13 +1,16 @@
 package dev.kit2512.oop_sms.data.repositories;
 
 import dev.kit2512.oop_sms.data.daos.UserDao.UserDao;
+import dev.kit2512.oop_sms.data.models.UserModel;
 import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserException;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserRepository;
+import java.sql.SQLException;
 
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class UserRepositoryImpl implements UserRepository {
     private UserDao userDao;
@@ -39,6 +42,26 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public UserEntity updateUser(UserEntity oldUserEntity, UserEntity newUserEntity) throws UserException {
-        return null;
+        if (!Objects.equals(oldUserEntity.getUserId(), newUserEntity.getUserId())) {
+            throw new UserException("Old user and new user are not the same");
+        }
+        try {
+            userDao.update(new UserModel(newUserEntity));
+        } catch (SQLException ex) {
+            throw new UserException("Unable to create new user");
+        }
+        return newUserEntity;
     }
+
+    @Override
+    public UserEntity getUser(Integer userId) throws UserException {
+        try {
+            return userDao.queryForEq("user_id", userId).get(0).mapToEntity();
+        } catch (SQLException ex) {
+            throw new UserException(ex.getLocalizedMessage());
+        }
+        
+    }
+    
+    
 }

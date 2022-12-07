@@ -1,11 +1,6 @@
 package dev.kit2512.oop_sms.domain.entities;
 
-import com.j256.ormlite.dao.ForeignCollection;
-import dev.kit2512.oop_sms.data.models.ResultModel;
-import dev.kit2512.oop_sms.data.models.StudentModel;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class StudentEntity extends UserEntity {
@@ -88,5 +83,9 @@ public class StudentEntity extends UserEntity {
             totalCredit += result.getSubject().getSubjectCredits();
         }
         return totalGrade / totalCredit;
+    }
+    
+    public String getFullClassLetter() {
+        return this.major.getCode() + this.classLetter;
     }
 }

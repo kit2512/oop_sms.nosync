@@ -10,7 +10,6 @@ import dev.kit2512.oop_sms.presentation.controllers.DashboardController;
 import dev.kit2512.oop_sms.presentation.controllers.LoginController;
 import dev.kit2512.oop_sms.presentation.models.LoginModel;
 import dev.kit2512.oop_sms.presentation.views.DashboardView.DashboardView;
-import dev.kit2512.oop_sms.presentation.views.InfoView.InforView;
 
 import java.beans.PropertyChangeEvent;
 import javax.inject.Inject;
@@ -220,8 +219,8 @@ public class LoginView extends javax.swing.JFrame implements AbstractView {
                         dashboardView.setVisible(true);
                     }
                     case STUDENT -> {
-                        final InforView userInformationView = new InforView();
-                        userInformationView.setVisible(true);
+//                        final InforView userInformationView = new InforView();
+//                        userInformationView.setVisible(true);
                     }
                 }
             }

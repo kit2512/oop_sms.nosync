@@ -2,6 +2,7 @@ package dev.kit2512.oop_sms.domain.entities;
 
 
 import dev.kit2512.oop_sms.data.models.UserModel;
+import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
@@ -128,9 +129,14 @@ public class UserEntity {
     public void setUserLastName(String userLastName) {
         this.userLastName = userLastName;
     }
-
+    
     public Date getUserDateOfBirth() {
-        return userDateOfBirth;
+        return this.userDateOfBirth;
+    }
+
+    public String getUserDateOfBirthString() {
+        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(this.userDateOfBirth);
     }
 
     public void setUserDateOfBirth(Date userDateOfBirth) {

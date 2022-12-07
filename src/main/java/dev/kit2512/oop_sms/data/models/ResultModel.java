@@ -3,7 +3,6 @@ package dev.kit2512.oop_sms.data.models;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import dev.kit2512.oop_sms.domain.entities.ResultEntity;
-import dev.kit2512.oop_sms.domain.entities.SubjectEntity;
 
 @DatabaseTable(tableName = ResultModel.TABLE_NAME)
 public final class ResultModel {
@@ -48,7 +47,7 @@ public final class ResultModel {
         return new ResultEntity(
           this.resultId,
           this.studentModel.getId(),
-          this.getSubjectEntity().mapToEntity(),
+          this.getSubjectModel().mapToEntity(),
                 this.resultScore
         );
     }
@@ -69,7 +68,7 @@ public final class ResultModel {
         this.studentModel = studentModel;
     }
 
-    public SubjectModel getSubjectEntity() {
+    public SubjectModel getSubjectModel() {
         return subjectModel;
     }
 

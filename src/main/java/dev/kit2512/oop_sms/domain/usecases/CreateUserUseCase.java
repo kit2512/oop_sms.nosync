@@ -5,7 +5,9 @@ import dev.kit2512.oop_sms.domain.repositories.AuthenticationRespository.Authent
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserException;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class CreateUserUseCase {
     protected final AuthenticationRepository authenticationRepository;
 
