@@ -15,4 +15,6 @@ public abstract class AbstractExcelFileModel {
     abstract public String getSheetName();
 
     abstract public String[] getColumnNames();
+    
+    abstract public String getPath();
 }

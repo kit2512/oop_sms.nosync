@@ -342,7 +342,7 @@ public class AddStudentView extends javax.swing.JDialog implements AbstractView 
 
     private void genderChanged() {
         final JRadioButton value = (JRadioButton)this.genderGroup.getSelection();
-        if (value.getText().equals("Male")) {
+        if (value.getText().equals("Female")) {
             controller.elementGenderChanged(true);
         } else {
             controller.elementGenderChanged(false);
@@ -384,7 +384,6 @@ public class AddStudentView extends javax.swing.JDialog implements AbstractView 
             case AddStudentModel.AVAILABLE_YEARS_OF_ADMISSION ->  {
                 final Integer year = (Integer)value;
                 final Integer currentYear = Calendar.getInstance().get(Calendar.YEAR);
-
                 for (Integer i = year; i <= currentYear; i++) {
                     this.yearOfAdmissionModel.addElement(i);
                 }

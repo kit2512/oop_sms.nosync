@@ -1,7 +1,7 @@
 package dev.kit2512.oop_sms.services.FileService;
 
 public interface FileService {
-    void exportToExcel(String path, AbstractExcelFileModel excelFileModel);
+    void exportToExcel( AbstractExcelFileModel excelFileModel) throws FileServiceException;
 
-    AbstractExcelFileModel importFromExcel(String path);
+    AbstractExcelFileModel importFromExcel(String path) throws FileServiceException;
 }

@@ -1,12 +1,10 @@
 package dev.kit2512.oop_sms.domain.entities;
 
-
-import dev.kit2512.oop_sms.data.models.UserModel;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
-public class UserEntity {
+public class UserEntity implements Cloneable{
     public String getFullName() {
         return this.userFirstName + " " + this.userMiddleName + " " + this.userLastName;
     }
@@ -201,5 +199,25 @@ public class UserEntity {
                 ", userEmail='" + userEmail + '\'' +
                 ", userPhone='" + userPhone + '\'' +
                 '}';
+    }
+    
+    @Override
+    public UserEntity clone() {
+        final UserEntity newUser = new UserEntity();
+            newUser.setUserId(this.getUserId());
+            newUser.setPassword(this.getPassword());
+            newUser.setUserAddress(this.getUserAddress());
+            newUser.setUserDateOfBirth(this.getUserDateOfBirth());
+            newUser.setUserDateCreated(this.getUserDateCreated());
+            newUser.setUserDateUpdated(this.getUserDateUpdated());
+            newUser.setUserFirstName(this.getUserFirstName());
+            newUser.setUserLastName(this.getUserLastName());
+            newUser.setUserMiddleName(this.getUserMiddleName());
+            newUser.setUserGender(this.getUserGender());
+            newUser.setUserPhone(this.getUserPhone());
+            newUser.setUserEmail(this.getUserEmail());
+            newUser.setUserRole(this.getUserRole());
+            newUser.setUsername(this.getUsername());
+        return newUser;
     }
 }

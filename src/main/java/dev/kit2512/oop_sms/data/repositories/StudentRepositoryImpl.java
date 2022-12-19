@@ -14,7 +14,6 @@ import dev.kit2512.oop_sms.data.models.StudentModel;
 import dev.kit2512.oop_sms.data.models.UserModel;
 import dev.kit2512.oop_sms.domain.entities.ResultEntity;
 import dev.kit2512.oop_sms.domain.entities.StudentEntity;
-import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentException;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentRepository;
 import java.sql.SQLException;
@@ -26,7 +25,7 @@ import java.util.logging.Logger;
 
 public class StudentRepositoryImpl implements StudentRepository {
 
-    static final Random random = new Random(new Date().getTime());
+    static final Random random = new Random(new Date().getTime() % 100000);
 
     private StudentDao studentDao;
     private UserDao userDao;
@@ -148,8 +147,23 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public StudentEntity updateStudent(StudentEntity oldStudentModel, StudentEntity newStudentModel) throws StudentException {
-        return null;
+    public StudentEntity updateStudent(StudentEntity oldStudent, StudentEntity newStudent) throws StudentException {
+        try {
+            studentDao.update(new StudentModel(newStudent));
+            final StudentEntity updatedEntity = studentDao.queryForId(newStudent.getStudentId()).mapToEntity();
+            return updatedEntity;
+        } catch (SQLException ex) {
+            try {
+                studentDao.update(new StudentModel(oldStudent));
+            } catch (SQLException ex1) {
+                Logger.getLogger(StudentRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex1);
+
+                throw new StudentException(ex.getLocalizedMessage());
+            }
+            Logger.getLogger(StudentRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new StudentException(ex.getLocalizedMessage());
+
+        }
     }
 
     @Override

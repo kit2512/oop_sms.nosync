@@ -41,14 +41,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public UserEntity updateUser(UserEntity oldUserEntity, UserEntity newUserEntity) throws UserException {
-        if (!Objects.equals(oldUserEntity.getUserId(), newUserEntity.getUserId())) {
-            throw new UserException("Old user and new user are not the same");
-        }
+    public UserEntity updateUser(UserEntity newUserEntity) throws UserException {
         try {
             userDao.update(new UserModel(newUserEntity));
         } catch (SQLException ex) {
-            throw new UserException("Unable to create new user");
+            throw new UserException(ex.getLocalizedMessage());
         }
         return newUserEntity;
     }
@@ -62,6 +59,4 @@ public class UserRepositoryImpl implements UserRepository {
         }
         
     }
-    
-    
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ExcelFileModel extends  AbstractExcelFileModel{
+    private String path;
     private String title;
     private String subTitle;
     private Class<?>[] columnTypes;
@@ -17,11 +18,13 @@ public class ExcelFileModel extends  AbstractExcelFileModel{
 
     }
 
-    public ExcelFileModel(String title, String subTitle, Class<?>[] columnTypes, HashMap<Integer, ArrayList<Object>> data) {
+    public ExcelFileModel(String path, String title, String subTitle, Class<?>[] columnTypes, HashMap<Integer, ArrayList<Object>> data) {
         this.title = title;
         this.subTitle = subTitle;
         this.columnTypes = columnTypes;
         this.data = data;
+        this.path = path;
+                
     }
 
     @Override
@@ -68,5 +71,22 @@ public class ExcelFileModel extends  AbstractExcelFileModel{
     @Override
     public String[] getColumnNames() {
         return columnNames;
+    }
+    
+    @Override
+    public String getPath() {
+        return this.path;
+    }
+    
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public void setColumnNames(String[] columnNames) {
+        this.columnNames = columnNames;
+    }
+
+    public void setSheetName(String sheetName) {
+        this.sheetName = sheetName;
     }
 }

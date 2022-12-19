@@ -15,24 +15,20 @@ import javax.inject.Singleton;
  * @author macpro13
  */
 @Singleton
-public class AddStudentUseCase {
-    
+public class UpdateStudentInfoUseCase {
+
     private final StudentRepository studentRepository;
-   
 
     @Inject
-    public AddStudentUseCase(StudentRepository studentRepository) {
+    public UpdateStudentInfoUseCase(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
-    
-    
-    public StudentEntity execute(StudentEntity newStudent) throws StudentException{
+
+    public void execute(StudentEntity oldStudent, StudentEntity newStudent) throws StudentException{
         try {
-           final Integer newStudentId = studentRepository.addStudent(newStudent);
-           return studentRepository.getStudent(newStudentId);
+            studentRepository.updateStudent(oldStudent, newStudent);
         } catch (StudentException ex) {
-            throw ex;
+            throw new StudentException(ex.getLocalizedMessage());
         }
     }
-    
 }

@@ -18,7 +18,6 @@ public class DaoModule {
     private StudentDao studentDao;
     private SubjectDao subjectDao;
     private MajorDao majorDao;
-
     private StaffDao staffDao;
 
     public DaoModule(UserDao userDao, ResultDao resultDao, StudentDao studentDao, SubjectDao subjectDao, MajorDao majorDao, StaffDao staffDao) {

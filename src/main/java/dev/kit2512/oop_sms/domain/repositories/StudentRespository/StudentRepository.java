@@ -22,7 +22,7 @@ public interface StudentRepository {
 
     Integer addStudent(StudentEntity userEntity) throws StudentException;
 
-    StudentEntity updateStudent(StudentEntity oldStudentModel, StudentEntity newStudentModel) throws StudentException;
+    StudentEntity updateStudent(StudentEntity oldStudent, StudentEntity newStudent) throws StudentException;
 
     StudentEntity getStudent(Integer userId) throws StudentException;
 }

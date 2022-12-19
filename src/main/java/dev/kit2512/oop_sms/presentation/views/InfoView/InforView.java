@@ -9,7 +9,6 @@ import dev.kit2512.oop_sms.presentation.controllers.InfoController;
 import dev.kit2512.oop_sms.presentation.models.InfoModel;
 import dev.kit2512.oop_sms.presentation.views.AbstractView;
 import java.beans.PropertyChangeEvent;
-import javax.inject.Inject;
 import javax.swing.JOptionPane;
 
 
@@ -17,6 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author h
  */
+
 public class InforView extends javax.swing.JDialog implements AbstractView {
     private final InfoController controller;
     
@@ -31,14 +31,16 @@ public class InforView extends javax.swing.JDialog implements AbstractView {
      * Creates new form InforView
      * @param controller
      */
-    @Inject
-    public InforView(InfoController controller) {
+    
+    public InforView(InfoController controller, Integer userId) {
         this.controller = controller;
+        controller.addView(this);
         initComponents();
-        this.setLocationRelativeTo(null);
         this.addView();
+        this.getUserInfo(userId);
+        this.setLocationRelativeTo(null);
         this.setModal(true);
-        
+        this.setVisible(true);
     }
     
     public void getUserInfo(Integer userId) {
@@ -60,7 +62,6 @@ public class InforView extends javax.swing.JDialog implements AbstractView {
             }
         });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -68,6 +69,9 @@ public class InforView extends javax.swing.JDialog implements AbstractView {
         if (userInfoPanel!=null) this.getContentPane().remove(this.userInfoPanel);
         if (studentResultPanel != null) this.getContentPane().remove(this.studentInfoPanel);
         if (studentResultPanel != null) this.getContentPane().remove(this.studentResultPanel);
+        this.revalidate();
+        this.setModal(false);
+        this.dispose();
     }//GEN-LAST:event_formWindowClosed
 
     /**
@@ -93,9 +97,11 @@ public class InforView extends javax.swing.JDialog implements AbstractView {
                     this.studentResultPanel = new StudentResultPanel(studentEntity.getResults());
                     studentResultPanel.setBounds(810, 5, 400, 400);
                     this.getContentPane().add(studentResultPanel);
+                } else {
+                    this.getContentPane().remove(this.studentInfoPanel);
+                    this.getContentPane().remove(this.studentResultPanel);
                 }
                 this.pack();
-                this.setVisible(true);
             }
             
             case InfoModel.ERROR_MESSAGE_PROPERTY -> {

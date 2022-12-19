@@ -7,7 +7,7 @@ package dev.kit2512.oop_sms.presentation.models;
 import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserException;
 import dev.kit2512.oop_sms.domain.usecases.GetUserInfoUseCase;
-import dev.kit2512.oop_sms.domain.usecases.UpdateUserInfoUseCase;
+import dev.kit2512.oop_sms.domain.usecases.UpdatePasswordUseCase;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -19,7 +19,7 @@ import javax.inject.Singleton;
 @Singleton
 public class UpdatePasswordModel extends AbstractModel {
     
-    private final UpdateUserInfoUseCase updatePasswordUseCase;
+    private final UpdatePasswordUseCase updatePasswordUseCase;
     
     private final GetUserInfoUseCase getUserInfoUseCase;
     
@@ -49,7 +49,7 @@ public class UpdatePasswordModel extends AbstractModel {
         
     
     @Inject
-    public UpdatePasswordModel(UpdateUserInfoUseCase updatePasswordUseCase, GetUserInfoUseCase getUserInfoUseCase) {
+    public UpdatePasswordModel(UpdatePasswordUseCase updatePasswordUseCase, GetUserInfoUseCase getUserInfoUseCase) {
         this.updatePasswordUseCase = updatePasswordUseCase;
         this.getUserInfoUseCase = getUserInfoUseCase;
     }

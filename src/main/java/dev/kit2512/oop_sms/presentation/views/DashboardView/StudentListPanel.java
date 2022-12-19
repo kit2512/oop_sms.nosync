@@ -11,28 +11,43 @@ import dev.kit2512.oop_sms.presentation.controllers.StudentListController;
 import dev.kit2512.oop_sms.presentation.models.DashboardModel;
 import dev.kit2512.oop_sms.presentation.models.StudentListModel;
 import dev.kit2512.oop_sms.presentation.views.AbstractView;
+import dev.kit2512.oop_sms.presentation.views.EditInfoView;
+import dev.kit2512.oop_sms.presentation.views.InfoView.InforView;
+import dev.kit2512.oop_sms.services.FileService.ExcelFileModel;
 import java.beans.PropertyChangeEvent;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.inject.Inject;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author macpro13
  */
-public class StudentListPanel extends javax.swing.JPanel implements AbstractView{
+public class StudentListPanel extends javax.swing.JPanel implements AbstractView {
 
     private DefaultTableModel studentListTableModel;
-    
+
     private StudentListController controller;
+
+    private final String[] columnNames = new String[]{
+        "User ID", "ID", "Name", "Major", "Gender", "Class", "Address", "Email", "Phone Number", "GPA"
+    };
+
+    private final Class[] columnTypes = new Class[]{
+        java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+    };
 
     /**
      * Creates new form StudentListPanel
      */
     @Inject
-    public StudentListPanel(StudentListController controller ) {
+    public StudentListPanel(StudentListController controller) {
         this.controller = controller;
         initTableModel();
         initComponents();
@@ -60,6 +75,7 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
         importExcelStudentBtn = new javax.swing.JButton();
         editStudentInfoBtn = new javax.swing.JButton();
         removeStudentBtn = new javax.swing.JButton();
+        exportListBtn = new javax.swing.JButton();
 
         setBounds(new java.awt.Rectangle(0, 0, 300, 300));
         setName("Staff"); // NOI18N
@@ -88,6 +104,11 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
         jPanel1.add(importExcelStudentBtn);
 
         editStudentInfoBtn.setText("Edit Information");
+        editStudentInfoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editStudentInfoBtnActionPerformed(evt);
+            }
+        });
         jPanel1.add(editStudentInfoBtn);
 
         removeStudentBtn.setText("Remove");
@@ -98,27 +119,35 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
         });
         jPanel1.add(removeStudentBtn);
 
+        exportListBtn.setText("Export List");
+        exportListBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportListBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(exportListBtn);
+
         add(jPanel1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void onTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onTableMouseClicked
         if (evt.getClickCount() == 2) {
             final int row = this.studentListTable.getSelectedRow();
-            final int userId = (int)this.studentListTable.getValueAt(row, 0);
-            App.appGraph.getInfoView().getUserInfo(userId);
+            final int userId = (int) this.studentListTable.getValueAt(row, 0);
+            final InforView infoView = new InforView(App.appGraph.getInfoController(), userId);
         }
-        
+
     }//GEN-LAST:event_onTableMouseClicked
 
     private void removeStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStudentBtnActionPerformed
         final Integer selectedRow = studentListTable.getSelectedRow();
         if (selectedRow >= 0) {
-            final Integer userId = (Integer)studentListTable.getValueAt(selectedRow, 0);
+            final Integer userId = (Integer) studentListTable.getValueAt(selectedRow, 0);
             controller.elementRemoveStudentClicked(userId);
         }
         controller.elementFetchingStudentListChanged(true);
-        
-        
+           
+
     }//GEN-LAST:event_removeStudentBtnActionPerformed
 
     private void addStudenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudenBtnActionPerformed
@@ -128,10 +157,60 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
         App.appGraph.getAddStudentView().setVisible(true);
     }//GEN-LAST:event_addStudenBtnActionPerformed
 
+    private void exportListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportListBtnActionPerformed
+
+        final JFileChooser saveFileChooser = new JFileChooser();
+
+        saveFileChooser.setDialogTitle("Save as");
+        saveFileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+        saveFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        saveFileChooser.setAcceptAllFileFilterUsed(false);
+        saveFileChooser.setFileFilter(new FileNameExtensionFilter("Excel file", "xls"));
+        saveFileChooser.setSelectedFile(new File("StudentList.xlsx"));
+
+        final Integer userInteraction = saveFileChooser.showSaveDialog(this);
+
+        if (userInteraction != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        final ExcelFileModel excelFileModel = new ExcelFileModel();
+        excelFileModel.setPath(saveFileChooser.getSelectedFile().getAbsolutePath());
+        excelFileModel.setTitle("Student List");
+        excelFileModel.setSubTitle("by KMA");
+        excelFileModel.setColumnTypes(this.columnTypes);
+        excelFileModel.setColumnNames(this.columnNames);
+        excelFileModel.setSheetName("Student List");
+        final HashMap<Integer, ArrayList<Object>> data = new HashMap<>();
+        final Integer rowCount = studentListTableModel.getRowCount();
+        final Integer columnCount = studentListTableModel.getColumnCount();
+        for (int i = 0; i < rowCount; i++) {
+            final ArrayList<Object> rowData = new ArrayList<>();
+            for (int j = 0; j < columnCount; j++) {
+                rowData.add(studentListTableModel.getValueAt(i, j));
+            }
+            data.put(i, rowData);
+        }
+        excelFileModel.setData(data);
+        controller.elementExportStudentListButtonPerformed(excelFileModel);
+    }//GEN-LAST:event_exportListBtnActionPerformed
+
+    private void editStudentInfoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStudentInfoBtnActionPerformed
+        final Integer selectedRow = studentListTable.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+        final Integer userId = (Integer) studentListTable.getValueAt(selectedRow, 0);
+        final EditInfoView editInfoView = new EditInfoView(App.appGraph.getEditInfoController(), userId);
+        App.appGraph.getStudentListController().elementFetchingStudentListChanged(true);
+        controller.elementFetchingStudentListChanged(true);
+    }//GEN-LAST:event_editStudentInfoBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addStudenBtn;
     private javax.swing.JButton editStudentInfoBtn;
+    private javax.swing.JButton exportListBtn;
     private javax.swing.JButton importExcelStudentBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -141,28 +220,22 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
 
     private void initTableModel() {
         this.studentListTableModel = new DefaultTableModel(
-            new Object [][] {
+                new Object[][]{},
+                this.columnNames
+        ) {
 
-            },
-            new String [] {
-                "User ID", "ID", "Name", "Major", "Gender", "Class", "Address", "Email", "Phone Number", "GPA"
-            } 
-        ){
-            Class[] types = new Class [] {
-                java.lang.Integer.class ,java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false, false, true, false, true
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false, false, false, false, false
             };
 
             @Override
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return columnTypes[columnIndex];
             }
 
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         };
     }
@@ -170,16 +243,18 @@ public class StudentListPanel extends javax.swing.JPanel implements AbstractView
     @Override
     public void modelPropertyChange(PropertyChangeEvent event) {
         switch (event.getPropertyName()) {
-            case DashboardModel.ERROR_MESSAGE_PROPERTY -> JOptionPane.showMessageDialog(this, (String) event.getNewValue(), "Error", 1);
+            case DashboardModel.ERROR_MESSAGE_PROPERTY ->
+                JOptionPane.showMessageDialog(this, (String) event.getNewValue(), "Error", 1);
             case DashboardModel.STUDENT_LIST_PROPERTY -> {
                 this.studentListTableModel.setRowCount(0);
                 final List<StudentEntity> studentList = (List<StudentEntity>) event.getNewValue();
                 mapStudentModelToTableRow(studentList);
                 this.studentListTable.setModel(this.studentListTableModel);
             }
+            case StudentListModel.EXPORT_STUDENT_LIST_SUCCESSFUL_PROPERTY -> JOptionPane.showMessageDialog(this, "Export successful", "Success", 1);
         }
     }
-    
+
     private void mapStudentModelToTableRow(List<StudentEntity> studentList) {
         for (StudentEntity student : studentList) {
             final List<Object> row = new ArrayList<>();

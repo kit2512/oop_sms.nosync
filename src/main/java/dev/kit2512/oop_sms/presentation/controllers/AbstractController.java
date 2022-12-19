@@ -55,21 +55,23 @@ public abstract class AbstractController implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
+        System.out.println(event.getPropertyName());
         for (AbstractView view : registeredViews) {
             view.modelPropertyChange(event);
         }
     }
 
     protected void setModelProperty(String propertyName, Object newValue) {
-        System.out.println("Calling " + propertyName + " : " + newValue);
         for (AbstractModel model : registeredModels) {
+            System.out.println("Calling " + propertyName + " : " + newValue + " on " + model.getClass());
             final String methodName = "set" + propertyName;
             try {
                 Method method = model.getClass()
                         .getMethod(methodName, newValue.getClass());
                 method.invoke(model, newValue);
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException ex) {
-                System.out.println("Error: " + ex.getMessage());
+                System.out.println("Error: " + " does not exist on " + model.getClass());
+                ex.printStackTrace();
             }
         }
     }

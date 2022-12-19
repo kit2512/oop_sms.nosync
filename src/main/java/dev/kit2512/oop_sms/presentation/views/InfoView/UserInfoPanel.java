@@ -6,6 +6,7 @@ package dev.kit2512.oop_sms.presentation.views.InfoView;
 
 import dev.kit2512.oop_sms.App;
 import dev.kit2512.oop_sms.domain.entities.UserEntity;
+import dev.kit2512.oop_sms.presentation.views.EditInfoView;
 import dev.kit2512.oop_sms.presentation.views.UpdatePasswordView;
 import java.awt.Component;
 import javax.swing.*;
@@ -259,7 +260,11 @@ public class UserInfoPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updaetInfoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updaetInfoBtnActionPerformed
-        // TODO add your handling code here:
+        final EditInfoView infoView = new EditInfoView(
+             App.appGraph.getEditInfoController(), userEntity.getUserId()
+        );
+        App.appGraph.getInfoController().elementUserIdChanged(userEntity.getUserId());
+        App.appGraph.getStudentListController().elementFetchingStudentListChanged(true);
     }//GEN-LAST:event_updaetInfoBtnActionPerformed
 
     private void deleteUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserBtnActionPerformed

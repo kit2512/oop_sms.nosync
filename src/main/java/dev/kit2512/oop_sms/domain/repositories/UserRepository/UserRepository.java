@@ -25,5 +25,5 @@ public interface UserRepository {
     
     UserEntity addUser(UserEntity userEntity) throws UserException;
     
-    UserEntity updateUser(UserEntity oldUserEntity, UserEntity newUserEntity) throws UserException;
+    UserEntity updateUser(UserEntity newUserEntity) throws UserException;
 }
