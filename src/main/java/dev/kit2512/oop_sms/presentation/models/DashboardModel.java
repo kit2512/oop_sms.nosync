@@ -10,11 +10,13 @@ import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentReposit
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  *
  * @author macpro13
  */
+@Singleton
 public class DashboardModel extends AbstractModel {
     private List<StudentEntity> studentList = new ArrayList<>();
     

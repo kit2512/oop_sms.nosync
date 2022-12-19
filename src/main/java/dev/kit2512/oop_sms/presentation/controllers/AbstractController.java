@@ -29,25 +29,33 @@ public abstract class AbstractController implements PropertyChangeListener {
     }
 
     public void addModel(AbstractModel model) {
+        System.out.println(this.getClass() + " is adding model" + model.getClass());
         model.addPropertyChangeListener(this);
         registeredModels.add(model);
     }
 
     public void removeModel(AbstractModel model) {
+        System.out.println(this.getClass() + " is removing model" + model.getClass());
+
         model.removePropertyChangeListener(this);
         registeredModels.remove(model);
     }
 
     public void addView(AbstractView view) {
+
+        System.out.println(this.getClass() + " is adding view" + view.getClass());
+
         registeredViews.add(view);
     }
 
     public void removeView(AbstractView view) {
+        System.out.println(this.getClass() + " is removing view " + view.getClass());
         registeredViews.remove(view);
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
+        System.out.println(event.getPropertyName());
         for (AbstractView view : registeredViews) {
             view.modelPropertyChange(event);
         }
@@ -55,13 +63,15 @@ public abstract class AbstractController implements PropertyChangeListener {
 
     protected void setModelProperty(String propertyName, Object newValue) {
         for (AbstractModel model : registeredModels) {
+            System.out.println("Calling " + propertyName + " : " + newValue + " on " + model.getClass());
+            final String methodName = "set" + propertyName;
             try {
-                final String methodName = "set" + propertyName;
                 Method method = model.getClass()
                         .getMethod(methodName, newValue.getClass());
                 method.invoke(model, newValue);
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException ex) {
-                Logger.getLogger(AbstractController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Error: " + " does not exist on " + model.getClass());
+                ex.printStackTrace();
             }
         }
     }

@@ -4,22 +4,32 @@
  */
 package dev.kit2512.oop_sms.presentation.views.InfoView;
 
+import dev.kit2512.oop_sms.domain.entities.ResultEntity;
+
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author h
  */
 public class StudentResultPanel extends javax.swing.JPanel {
+    private DefaultTableModel tableModel;
+    
+    private List<ResultEntity> results;
     
     /**
      * Creates new form StudentResultPanel
      */
-    public StudentResultPanel() {
+    public StudentResultPanel(List<ResultEntity> results) {
+        this.results = results;
         initComponents();
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.jScrollPane1.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.jTable1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.resultTable.setAlignmentX(Component.LEFT_ALIGNMENT);
+        initTable();
     }
 
     /**
@@ -32,7 +42,7 @@ public class StudentResultPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        resultTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         editScoreBtn = new javax.swing.JButton();
         removeResultBtn = new javax.swing.JButton();
@@ -48,17 +58,9 @@ public class StudentResultPanel extends javax.swing.JPanel {
         jScrollPane1.setMinimumSize(null);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(400, 300));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Linux",  new Float(5.0)},
-                {"2", null, null},
-                {"3", null, null},
-                {"4", null, null},
-                {"5", null, null},
-                {"6", null, null},
-                {"7", null, null},
-                {"8", null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Code", "Name", "Result"
@@ -72,10 +74,10 @@ public class StudentResultPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jTable1.setPreferredSize(new java.awt.Dimension(216, 448));
-        jTable1.getTableHeader().setResizingAllowed(false);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
+        resultTable.setPreferredSize(new java.awt.Dimension(216, 448));
+        resultTable.getTableHeader().setResizingAllowed(false);
+        resultTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(resultTable);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -99,12 +101,43 @@ public class StudentResultPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 
+    private void initTable() {
+        this.tableModel = new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Result"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        };
+        setTableModelData();
+    }
+    
+    private void setTableModelData() {
+        for (ResultEntity result : results) {
+            final ArrayList<Object> row = new ArrayList<>();
+            row.add(result.getResultId());
+            row.add(result.getSubject().getSubjectName());
+            row.add(result.getResultScore());
+            tableModel.addRow(row.toArray());
+        }
+        resultTable.setModel(tableModel);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton editScoreBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton removeResultBtn;
+    private javax.swing.JTable resultTable;
     private javax.swing.JButton updateResultBtn;
     private javax.swing.JButton updateResultBtn1;
     // End of variables declaration//GEN-END:variables

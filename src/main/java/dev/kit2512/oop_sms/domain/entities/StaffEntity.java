@@ -2,7 +2,7 @@ package dev.kit2512.oop_sms.domain.entities;
 
 import java.util.Date;
 
-public class StaffEntity extends UserEntity{
+public class StaffEntity extends UserEntity implements Cloneable{
     private Integer salary;
 
     public StaffEntity() {

@@ -1,8 +1,7 @@
 package dev.kit2512.oop_sms.domain.entities;
 
-import dev.kit2512.oop_sms.data.models.SubjectModel;
 
-public class SubjectEntity {
+public class SubjectEntity implements Cloneable{
     private Integer subjectId;
     private String subjectName;
     private Integer subjectCredits;

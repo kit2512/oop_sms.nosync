@@ -2,6 +2,7 @@ package dev.kit2512.oop_sms.data.repositories;
 
 import dev.kit2512.oop_sms.data.daos.StaffDao.StaffDao;
 import dev.kit2512.oop_sms.domain.entities.StaffEntity;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
 import dev.kit2512.oop_sms.domain.repositories.StaffRepository.StaffException;
 import dev.kit2512.oop_sms.domain.repositories.StaffRepository.StaffRepository;
 
@@ -44,5 +45,10 @@ public class StaffRepositoryImpl implements StaffRepository {
     @Override
     public StaffEntity updateStaff(StaffEntity oldStaffModel, StaffEntity newStaffModel) throws StaffException {
         return null;
+    }
+
+    @Override
+    public UserEntity getStaff(Integer userId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

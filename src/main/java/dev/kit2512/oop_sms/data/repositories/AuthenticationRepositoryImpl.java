@@ -63,7 +63,7 @@ public class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
         } catch (IndexOutOfBoundsException e) {
             throw new AuthenticationException("Username or password is incorrect");
-        } catch (Exception e) {
+        } catch (AuthenticationException | SQLException e) {
             throw new AuthenticationException(e.getMessage());
         }
     }

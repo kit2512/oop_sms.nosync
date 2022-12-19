@@ -1,8 +1,7 @@
 package dev.kit2512.oop_sms.domain.entities;
 
-import dev.kit2512.oop_sms.data.models.MajorModel;
 
-public class MajorEntity extends BaseEntity {
+public class MajorEntity extends BaseEntity implements Cloneable{
     private Integer id;
     private String name;
     private String code;
@@ -47,4 +46,11 @@ public class MajorEntity extends BaseEntity {
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return this.getCode() + " - " + this.getName();
+    }
+    
+    
 }

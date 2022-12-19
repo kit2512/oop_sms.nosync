@@ -18,10 +18,12 @@ public interface UserRepository {
     List<UserEntity> getUsers() throws UserException;
 
     List<UserEntity> getUsers(HashMap<String, Object> filter) throws UserException;
+    
+    UserEntity getUser(Integer userId) throws UserException;
 
     UserEntity removeUser(UserEntity userEntity) throws UserException;
     
     UserEntity addUser(UserEntity userEntity) throws UserException;
     
-    UserEntity updateUser(UserEntity oldUserEntity, UserEntity newUserEntity) throws UserException;
+    UserEntity updateUser(UserEntity newUserEntity) throws UserException;
 }

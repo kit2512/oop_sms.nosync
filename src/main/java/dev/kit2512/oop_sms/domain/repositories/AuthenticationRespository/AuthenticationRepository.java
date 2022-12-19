@@ -12,7 +12,7 @@ import dev.kit2512.oop_sms.domain.entities.UserEntity;
  * @author macpro13
  */
 public interface AuthenticationRepository {
-    UserEntity getCurrentUser() throws AuthenticationException;
+    UserEntity getCurrentUser();
 
     UserEntity logIn(String username, String password) throws AuthenticationException;
 

@@ -10,11 +10,13 @@ import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentReposit
 
 import java.util.ArrayList;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  *
  * @author macpro13
  */
+@Singleton
 public class GetStudentListUseCase {
     final private StudentRepository studentRepositroy;
 

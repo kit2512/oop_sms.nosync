@@ -3,36 +3,48 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package dev.kit2512.oop_sms.presentation.views.InfoView;
+import dev.kit2512.oop_sms.domain.entities.StudentEntity;
+import dev.kit2512.oop_sms.domain.entities.UserEntity;
+import dev.kit2512.oop_sms.presentation.controllers.InfoController;
+import dev.kit2512.oop_sms.presentation.models.InfoModel;
+import dev.kit2512.oop_sms.presentation.views.AbstractView;
+import java.beans.PropertyChangeEvent;
+import javax.swing.JOptionPane;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import javax.swing.UIManager;
-
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
  * @author h
  */
-public class InforView extends javax.swing.JDialog {
 
+public class InforView extends javax.swing.JDialog implements AbstractView {
+    private final InfoController controller;
+    
+    private UserInfoPanel userInfoPanel;
+    
+    private StudentInfoPanel studentInfoPanel;
+    
+    private StudentResultPanel studentResultPanel;
+    
+    private UserEntity userEntity = null;
     /**
      * Creates new form InforView
+     * @param controller
      */
-    public InforView() {
+    
+    public InforView(InfoController controller, Integer userId) {
+        this.controller = controller;
+        controller.addView(this);
         initComponents();
-        this.add(new UserInfoPanel());
-        this.add(new StudentInfoPanel());
-        
-        this.add(new StudentResultPanel());
+        this.addView();
+        this.getUserInfo(userId);
         this.setLocationRelativeTo(null);
         this.setModal(true);
-        this.pack();
-        
+        this.setVisible(true);
     }
-
-    public InforView(String title) {
-        InforView view = new InforView();
-        view.setTitle(title);
+    
+    public void getUserInfo(Integer userId) {
+        controller.elementUserIdChanged(userId);
     }
 
     /**
@@ -44,43 +56,68 @@ public class InforView extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        if (userInfoPanel!=null) this.getContentPane().remove(this.userInfoPanel);
+        if (studentResultPanel != null) this.getContentPane().remove(this.studentInfoPanel);
+        if (studentResultPanel != null) this.getContentPane().remove(this.studentResultPanel);
+        this.revalidate();
+        this.setModal(false);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosed
+
     /**
+     * @param event
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch (UnsupportedLookAndFeelException ex) {
-            System.err.println("Failed to initialize LaF");
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new InforView().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void modelPropertyChange(PropertyChangeEvent event) {
+        switch (event.getPropertyName()) {
+            case InfoModel.USER_PROPERTY -> {
+                this.userEntity = (UserEntity)event.getNewValue();
+                this.userInfoPanel = new UserInfoPanel(this.userEntity);
+                userInfoPanel.setBounds(5, 5, 400, 400);
+                this.getContentPane().add(userInfoPanel);
+                if (userEntity instanceof StudentEntity studentEntity) {
+                    this.studentInfoPanel = new StudentInfoPanel(studentEntity);
+                    studentInfoPanel.setBounds(405, 5, 400, 400);
+                    this.getContentPane().add(studentInfoPanel);
+                    this.studentResultPanel = new StudentResultPanel(studentEntity.getResults());
+                    studentResultPanel.setBounds(810, 5, 400, 400);
+                    this.getContentPane().add(studentResultPanel);
+                } else {
+                    this.getContentPane().remove(this.studentInfoPanel);
+                    this.getContentPane().remove(this.studentResultPanel);
+                }
+                this.pack();
+            }
+            
+            case InfoModel.ERROR_MESSAGE_PROPERTY -> {
+                JOptionPane.showMessageDialog(this, "Unable to get user");
+            }
+            
+            case InfoModel.CLOSE_PROPERTY -> {
+                if (userInfoPanel!=null) this.getContentPane().remove(this.userInfoPanel);
+                if (studentResultPanel != null) this.getContentPane().remove(this.studentInfoPanel);
+                if (studentResultPanel != null) this.getContentPane().remove(this.studentResultPanel);
+                this.dispose();
+            }
+        }
+    }
+
+    private void addView() {
+        controller.addView(this);
+    }
 }

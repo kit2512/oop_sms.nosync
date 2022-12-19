@@ -251,4 +251,12 @@ public class UserModel {
         entity.setUserPhone(this.userPhone);
         return entity;
     }
+
+    public void setUsername(String username) {
+        this.userUsername = username;
+    }
+
+    public void setPassword(String password) {
+        this.userPassword = password;
+    }
 }

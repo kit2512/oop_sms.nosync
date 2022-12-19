@@ -7,13 +7,22 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import javax.inject.Inject;
+
+
 
 public class FileServiceImpl implements FileService {
+    
+    @Inject
+    public FileServiceImpl() {
+        
+    }
+    
     @Override
-    public void exportToExcel(String path, AbstractExcelFileModel excelFileModel) {
+    public void exportToExcel(AbstractExcelFileModel excelFileModel) throws FileServiceException{
         try {
             Workbook workbook = new XSSFWorkbook();
             Sheet sheet = workbook.createSheet(excelFileModel.getTitle());
@@ -27,7 +36,7 @@ public class FileServiceImpl implements FileService {
             Class<?>[] columnTypes = excelFileModel.getColumnTypes();
             for (int i = 0; i < columnTypes.length; i++) {
                 cell = row.createCell(i);
-                cell.setCellValue(columnTypes[i].getSimpleName());
+                cell.setCellValue(excelFileModel.getColumnNames()[i]);
             }
             Map<Integer, ArrayList<Object>> data = excelFileModel.getData();
             int rowNumber = 3;
@@ -39,31 +48,16 @@ public class FileServiceImpl implements FileService {
                 }
                 rowNumber++;
             }
-            workbook.write(new FileOutputStream(path));
+            workbook.write(new FileOutputStream(excelFileModel.getPath()));
             workbook.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public AbstractExcelFileModel importFromExcel(String path) {
+    public AbstractExcelFileModel importFromExcel(String path) throws FileServiceException{
         return null;
     }
 
-
-    public static void main(String[] args) {
-        FileServiceImpl fileService = new FileServiceImpl();
-        ExcelFileModel excelFileModel = new ExcelFileModel();
-        excelFileModel.setTitle("Test");
-        excelFileModel.setSubTitle("Test");
-        excelFileModel.setColumnTypes(new Class<?>[]{Integer.class, String.class});
-        HashMap<Integer, ArrayList<Object>> data = new HashMap<>();
-        ArrayList<Object> row = new ArrayList<>();
-        row.add(1);
-        row.add("Test");
-        data.put(0, row);
-        excelFileModel.setData(data);
-        fileService.exportToExcel("./src/res/test.xlsx", excelFileModel);
-    }
 }

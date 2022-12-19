@@ -7,11 +7,13 @@ package dev.kit2512.oop_sms.presentation.controllers;
 import dev.kit2512.oop_sms.presentation.models.LoginModel;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  *
  * @author macpro13
  */
+@Singleton
 public class LoginController extends AbstractController {
 
     public LoginController() {

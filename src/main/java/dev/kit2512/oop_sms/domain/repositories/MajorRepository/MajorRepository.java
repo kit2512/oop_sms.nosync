@@ -1,20 +1,19 @@
 package dev.kit2512.oop_sms.domain.repositories.MajorRepository;
 
 import dev.kit2512.oop_sms.domain.entities.MajorEntity;
-import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserException;
 
 import java.util.HashMap;
 import java.util.List;
 
 public interface MajorRepository {
-    List<MajorEntity> getUsers() throws UserException;
+    List<MajorEntity> getMajors() throws MajorException;
 
-    List<MajorEntity> getUsers(HashMap<String, Object> filter) throws UserException;
+    List<MajorEntity> getMajors(HashMap<String, Object> filter) throws MajorException;
 
-    MajorEntity removeUser(MajorEntity userEntity) throws UserException;
+    MajorEntity removeMajor(MajorEntity userEntity) throws MajorException;
 
-    MajorEntity addUser(MajorEntity userEntity) throws UserException;
+    MajorEntity addMajor(MajorEntity userEntity) throws MajorException;
 
-    MajorEntity updateUser(MajorEntity oldMajorModel, MajorEntity newMajorModel) throws MajorException;
+    MajorEntity updateMajor(MajorEntity oldMajorModel, MajorEntity newMajorModel) throws MajorException;
 }
 

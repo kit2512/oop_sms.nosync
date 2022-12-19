@@ -39,10 +39,10 @@ public class StudentModel {
 
 
     @DatabaseField(columnName = UserModel.COLUMN_USER_ID, foreign = true, canBeNull = false)
-    private UserModel user;
+    public UserModel user;
 
     @DatabaseField(columnName = MajorModel.COLUMN_MAJOR_ID, foreign = true, canBeNull = false)
-    private MajorModel major;
+    public MajorModel major;
 
     public StudentModel() {
 
@@ -54,10 +54,10 @@ public class StudentModel {
         this.major = major;
     }
 
-    public StudentModel(StudentEntity model) {
-        this.yearOfAdmission = model.getYearOfAdmission();
-        this.classLetter = model.getClassLetter();
-        this.major = new MajorModel(model.getMajor());
+    public StudentModel(StudentEntity entity) {
+        this.yearOfAdmission = entity.getYearOfAdmission();
+        this.classLetter = entity.getClassLetter();
+        this.major = new MajorModel(entity.getMajor());
     }
 
     public StudentEntity mapToEntity() {
@@ -76,7 +76,6 @@ public class StudentModel {
         studentEntity.setUserAddress(this.user.getUserAddress());
         studentEntity.setUserDateOfBirth(this.user.getUserDateOfBirth());
         studentEntity.setUserMiddleName(this.user.getUserMiddleName());
-
         studentEntity.setStudentId(this.id);
         studentEntity.setMajor(this.major.mapToEntity());
         studentEntity.setClassLetter(this.classLetter);

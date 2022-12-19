@@ -4,6 +4,7 @@
  */
 package dev.kit2512.oop_sms.presentation.views.InfoView;
 
+import dev.kit2512.oop_sms.domain.entities.StudentEntity;
 import java.awt.Component;
 
 /**
@@ -11,12 +12,19 @@ import java.awt.Component;
  * @author h
  */
 public class StudentInfoPanel extends javax.swing.JPanel {
-
+    private final StudentEntity student;
+    
     /**
      * Creates new form StudentInformationView
      */
-    public StudentInfoPanel() {
+    public StudentInfoPanel(StudentEntity studentEntity) {
         initComponents();
+        this.student = studentEntity;
+        this.idLb.setText(student.getStudentFullId());
+        this.classLb.setText(student.getFullClassLetter());
+        this.majorLb.setText(student.getMajor().getName());
+        this.yoAdmissionLb.setText(student.getYearOfAdmission().toString());
+
         this.setAlignmentX(Component.RIGHT_ALIGNMENT);
     }
 
@@ -30,44 +38,44 @@ public class StudentInfoPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        idLb = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        yoAdmissionLb = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        classLb = new javax.swing.JLabel();
+        majorLb = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
 
         jLabel1.setText("Student ID");
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel2.setText("CT050222");
-        jLabel2.setToolTipText("");
+        idLb.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        idLb.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        idLb.setText("CT050222");
+        idLb.setToolTipText("");
 
         jLabel3.setText("Year of adminsion");
 
-        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel4.setText("2020");
-        jLabel4.setToolTipText("");
+        yoAdmissionLb.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        yoAdmissionLb.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        yoAdmissionLb.setText("2020");
+        yoAdmissionLb.setToolTipText("");
 
         jLabel5.setText("Class");
 
-        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel6.setText("CT5B");
-        jLabel6.setToolTipText("");
+        classLb.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        classLb.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        classLb.setText("CT5B");
+        classLb.setToolTipText("");
 
-        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel7.setText("Công nghệ thông tin");
-        jLabel7.setToolTipText("");
+        majorLb.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        majorLb.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        majorLb.setText("Công nghệ thông tin");
+        majorLb.setToolTipText("");
 
         jLabel8.setText("Major");
 
-        jButton1.setText("Edit");
+        editBtn.setText("Edit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -79,22 +87,22 @@ public class StudentInfoPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
-                        .addComponent(jLabel4))
+                        .addComponent(yoAdmissionLb))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 267, Short.MAX_VALUE)
-                        .addComponent(jLabel6))
+                        .addComponent(classLb))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                        .addComponent(jLabel7))
+                        .addComponent(majorLb))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(editBtn))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
+                        .addComponent(idLb)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,35 +111,35 @@ public class StudentInfoPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(idLb))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(yoAdmissionLb))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(classLb))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel7))
+                    .addComponent(majorLb))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(editBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel classLb;
+    private javax.swing.JButton editBtn;
+    private javax.swing.JLabel idLb;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel majorLb;
+    private javax.swing.JLabel yoAdmissionLb;
     // End of variables declaration//GEN-END:variables
 }

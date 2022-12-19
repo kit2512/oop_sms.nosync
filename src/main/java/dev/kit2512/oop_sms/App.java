@@ -11,6 +11,7 @@ import dev.kit2512.oop_sms.config.injectors.AppGraph;
 import dev.kit2512.oop_sms.config.injectors.DaggerAppGraph;
 import dev.kit2512.oop_sms.config.injectors.DaoModule;
 import dev.kit2512.oop_sms.config.injectors.RepositoryModule;
+import dev.kit2512.oop_sms.config.injectors.ServiceModule;
 import dev.kit2512.oop_sms.data.daos.MajorDao.MajorDaoImpl;
 import dev.kit2512.oop_sms.data.daos.ResultDao.ResultDao;
 import dev.kit2512.oop_sms.data.daos.ResultDao.ResultDaoImpl;
@@ -30,6 +31,8 @@ import dev.kit2512.oop_sms.domain.repositories.StaffRepository.StaffRepository;
 import dev.kit2512.oop_sms.domain.repositories.StudentRespository.StudentRepository;
 import dev.kit2512.oop_sms.domain.repositories.SubjectRepository.SubjectRepository;
 import dev.kit2512.oop_sms.domain.repositories.UserRepository.UserRepository;
+import dev.kit2512.oop_sms.services.FileService.FileService;
+import dev.kit2512.oop_sms.services.FileService.FileServiceImpl;
 
 
 import java.sql.SQLException;
@@ -72,6 +75,10 @@ public class App {
     private DaoModule daoModule;
 
     private RepositoryModule repositoryModule;
+    
+    private FileService fileService;
+    
+    private ServiceModule serviceModule;
 
 
 
@@ -85,7 +92,9 @@ public class App {
     public App() {
         try {
             /* Set the Nimbus look and feel */
+            System.setProperty("log4j.configurationFile","./src/res/log4j2.xml");
             UIManager.setLookAndFeel(new FlatDarkLaf());
+            setUpService();
             setUpDaos();
             setUpRepository();
             setUpDagger();
@@ -150,9 +159,16 @@ public class App {
                 majorRepository,
                 staffRepository
         );
+        
+        serviceModule = new ServiceModule(fileService);
 
         appGraph = DaggerAppGraph.builder()
                 .daoModule(daoModule)
-                .repositoryModule(repositoryModule).build();
+                .repositoryModule(repositoryModule)
+                .serviceModule(serviceModule).build();
+    }
+
+    private void setUpService() {
+        this.fileService = new FileServiceImpl();
     }
 }

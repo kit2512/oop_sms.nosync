@@ -1,9 +1,8 @@
 package dev.kit2512.oop_sms.domain.entities;
 
 
-import dev.kit2512.oop_sms.data.models.ResultModel;
 
-public class ResultEntity {
+public class ResultEntity implements Cloneable{
     private Integer studentId;
 
     private Integer resultId;
